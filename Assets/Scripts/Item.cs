@@ -12,6 +12,13 @@ public enum ItemType
     Coin
 }
 
+public enum CoinType
+{
+    Copper,
+    Silver,
+    Gold
+}
+
 public class Item : MonoBehaviour
 {
     public ItemType type;
@@ -20,6 +27,8 @@ public class Item : MonoBehaviour
     [SerializeField] private GameObject shieldEffectPrefab;
     [SerializeField] private GameObject magnetEffectPrefab;
     [SerializeField] private GameObject potionEffectPrefab;
+
+    public CoinType coinType;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -45,9 +54,9 @@ public class Item : MonoBehaviour
             //case ItemType.Potion:
             //    HealPlayer(player);
             //    break;
-            //case ItemType.Coin:
-            //    GetCoin(player);
-            //    break;
+            case ItemType.Coin:
+                GetCoin(player);
+                break;
         }
     }
 
@@ -68,15 +77,20 @@ public class Item : MonoBehaviour
 
         rb2d.velocity = new Vector2(30, rb2d.velocity.y);   // 속도 임의 30증가
 
-        // 무적코드
+        // 무적코드 : 플레이어 체력이 장애물을 충돌시에 떨어지지 않는다.
+
         // 질주시 무적 (3초)
         yield return new WaitForSeconds(3f);
+
+        // 질주 종료 = 원래 속도로
+        rb2d.velocity = new Vector2(gameSpeed, rb2d.velocity.y);
 
         // 질주 종료시 1초간 무적
         yield return new WaitForSeconds(1f);
 
         //무적해제코드
 
+        // 이펙트 사라짐
         if (effect != null)
             Destroy(effect);
 
@@ -100,10 +114,26 @@ public class Item : MonoBehaviour
     //    // 플레이어 체력 상한선 넘지않게
     //}
 
-    //private void GetCoin(GameObject player)
-    //{
-    //    //금화는 50
-    //    //은화는 10
-    //    //동화는 1
-    //}
+    private void GetCoin(GameObject player)
+    {
+        int score = 0;
+
+        switch (coinType)
+        {
+            //동화는 1
+            case CoinType.Copper:
+                score = 1;
+                break;
+            //은화는 10
+            case CoinType.Silver:
+                score = 10;
+                break;
+            //금화는 50
+            case CoinType.Gold:
+                score = 50;
+                break;
+        }
+
+        Debug.Log($"코인 : {coinType} + {score}");
+    }
 }
