@@ -52,7 +52,7 @@ public class Item : MonoBehaviour
         if (rb2d == null)
             yield break;
 
-        float originalSpeed = rb2d.velocity.x;
+        float gameSpeed = rb2d.velocity.x;
         rb2d.velocity = new Vector2(30, rb2d.velocity.y);   // 속도 임의 30증가
 
         // 질주시 무적 (3초?)
