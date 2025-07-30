@@ -37,7 +37,7 @@ public class Obstacle : MonoBehaviour
 
         if (lastKind == ObstacleKind.Slide && data.kind == ObstacleKind.Slide)
         {
-            gap = 0f;
+            gap = Mathf.Max(1.5f, data.distanceToNext); // 0으로했더니 슬라이드장애물이 겹침 -> 최소 거리
         }
 
         Vector3 position = lastPosition + new Vector3(gap, 0f, 0f); // 최종위치계산
