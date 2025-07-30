@@ -21,7 +21,7 @@ public class Obstacle : MonoBehaviour
 
         if ( topObject.position.x == bottomObject.position.x)
         {
-            topObject.position.y = null;
+            topObject.position.y = ;
         }
 
         Vector3 placePosition = lastPosition + new Vector3(widthPadding, 0);    // xรเ
