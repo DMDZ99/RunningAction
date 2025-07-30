@@ -4,31 +4,57 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    public float highPosY = 1f;     // 장애물위치 Y축상한선
-    public float lowPosY = -1f;     // 하한선
+    public List<GameObject> obstaclePrefabs;
+    public Transform parent;
+    public int initialCount = 5;   // 게임 시작시 생성할 장애물 수
 
-    public Transform topObject;     // 장애물 상단
-    public Transform bottomObject;  // 장애물 하단
+    private Vector3 lastPosition;
+    private ObstacleKind lastKind = ObstacleKind.Jump;  // 마지막장애물 종류 = 점프
 
-    public float widthPadding = 4f; // 장애물간 x축 간격
-
-    public Vector3 SetRandomPlace(Vector3 lastPosition, int obstacleCount)  // 장애물 랜덤 배치
+    private void Start()
     {
-        // 상단장애물, 하단장애물 위치 각각 설정후
-        // 상단장애물 생성시 하단장애물도 같은 x값으로 생성시 일정간격 벌어지게
-        topObject.position = new Vector3(0, 8f);        // 수치 따로 조정해야함
-        bottomObject.position = new Vector3(0, 4f);
+        lastPosition = transform.position;  // 시작위치
 
-        if ( topObject.position.x == bottomObject.position.x)
+        for (int i = 0; i < initialCount; i++)  // 반복생성
         {
-            topObject.position.y = ;
+            SpawnObstacle();
+        }
+    }
+
+    private void SpawnObstacle()
+    {
+        GameObject prefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Count)];    // 프리팹에서 랜덤 선택
+
+        ObstacleData data = prefab.GetComponent<ObstacleData>();
+
+        // 구멍함정
+        //if (data.soloObstacle)
+        //{
+
+        //}
+
+        float gap = data.distanceToNext;    // 간격 초기화
+
+        if (lastKind == ObstacleKind.Slide && data.kind == ObstacleKind.Slide)
+        {
+            gap = 0f;
         }
 
-        Vector3 placePosition = lastPosition + new Vector3(widthPadding, 0);    // x축
-        placePosition.y = Random.Range(lowPosY, highPosY);                      // y축 값 랜덤
+        Vector3 position = lastPosition + new Vector3(gap, 0f, 0f); // 최종위치계산
 
-        transform.position = placePosition;
+        switch (data.kind)  // 장애물 종류에 따른 y값
+        {
+            case ObstacleKind.Jump:
+                position.y = 3.5f;
+                break;
+            case ObstacleKind.Slide:
+                position.y = 1f;
+                break;
+        }
 
-        return placePosition;   // 반환
+        Instantiate(prefab, position, Quaternion.identity, parent); // 생성
+
+        lastPosition = position;    // 위치, 종류 저장
+        lastKind =data.kind;
     }
 }
