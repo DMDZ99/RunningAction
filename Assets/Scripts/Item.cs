@@ -77,7 +77,7 @@ public class Item : MonoBehaviour
 
         rb2d.velocity = new Vector2(30, rb2d.velocity.y);   // 속도 임의 30증가
 
-        // 무적코드 : 플레이어 체력이 장애물을 충돌시에 떨어지지 않는다.
+        // 무적코드 : 플레이어가 장애물 충돌을 무시한다. -> 플레이어 쪽에서 무적 처리?
 
         // 질주시 무적 (3초)
         yield return new WaitForSeconds(3f);
