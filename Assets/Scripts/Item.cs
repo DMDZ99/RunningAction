@@ -16,6 +16,11 @@ public class Item : MonoBehaviour
 {
     public ItemType type;
 
+    [SerializeField] private GameObject rushEffectPrefab;
+    [SerializeField] private GameObject shieldEffectPrefab;
+    [SerializeField] private GameObject magnetEffectPrefab;
+    [SerializeField] private GameObject potionEffectPrefab;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;        // 플레이어가 아니면 리턴
@@ -53,13 +58,28 @@ public class Item : MonoBehaviour
             yield break;
 
         float gameSpeed = rb2d.velocity.x;
+
+        GameObject effect = null;   // 게임오브젝트 이펙트
+        if (rushEffectPrefab != null)
+        {
+            // 플레이어위치에 질주이펙트생성
+            effect = Instantiate(rushEffectPrefab, player.transform.position, Quaternion.identity, player.transform);
+        }
+
         rb2d.velocity = new Vector2(30, rb2d.velocity.y);   // 속도 임의 30증가
 
-        // 질주시 무적 (3초?)
+        // 무적코드
+        // 질주시 무적 (3초)
+        yield return new WaitForSeconds(3f);
 
         // 질주 종료시 1초간 무적
+        yield return new WaitForSeconds(1f);
 
-        
+        //무적해제코드
+
+        if (effect != null)
+            Destroy(effect);
+
     }
 
     //private System.Collections.IEnumerator ShieldEffect(GameObject player)
