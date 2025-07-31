@@ -133,6 +133,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // 장애물 충돌 시 구현된는 애니메이션
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // damage 시작점 무적 판단 (무적 시 리턴)
@@ -161,8 +162,8 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-    private void SpriteDamageMethod() // 
+    // 장애물 충돌 시 구현된는 애니메이션에 필요한 메소드
+    private void SpriteDamageMethod() // 출동 시 알파 값 조정
     {
         animator.SetTrigger("isDamege");
 
@@ -172,7 +173,7 @@ public class Player : MonoBehaviour
         // 무적 true
         isInvincible = true;
     }
-    private void SpriteResetMethod() // 
+    private void SpriteResetMethod() // 출동 후 알파 값 회복
     {
         Color color = playerOriginSprite.color;
         color.a = 1f;

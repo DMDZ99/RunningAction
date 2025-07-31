@@ -250,7 +250,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   slideCollider: {fileID: 281570724}
-  invincibleTime: 1
+  invincibleTime: 2
   animator: {fileID: 530977616}
   runnerCollider: {fileID: 94774689}
   playerOriginSprite: {fileID: 530977617}
