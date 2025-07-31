@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 94774690}
   - component: {fileID: 94774689}
   - component: {fileID: 94774688}
-  - component: {fileID: 94774687}
+  - component: {fileID: 94774691}
   m_Layer: 0
   m_Name: Player_Knight
   m_TagString: Untagged
@@ -142,25 +142,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &94774687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94774686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47e28214ee4c6714c9a8b3c2d00007da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidbody2D: {fileID: 94774688}
-  forwardSpeed: 0
-  JumpForce: 20
-  platformLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  slideCollider: {fileID: 281570724}
 --- !u!50 &94774688
 Rigidbody2D:
   serializedVersion: 4
@@ -250,6 +231,25 @@ Transform:
   - {fileID: 281570723}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &94774691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94774686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0bf1ac2f086934ca90e900658873f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody2D: {fileID: 94774688}
+  forwardSpeed: 0
+  JumpForce: 20
+  platformLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  slideCollider: {fileID: 281570724}
 --- !u!1 &281570722
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +427,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 3.125, y: 1.71875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -535,7 +535,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1608010411}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0736e600dad11f5499a026492597f305, type: 3}
+  m_Script: {fileID: 11500000, guid: 8338913eb1bba2845b89df953e6c52d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 94774690}
