@@ -13,6 +13,8 @@ public class Obstacle : MonoBehaviour
 
     [SerializeField] private CoinPlacer coinPlacer;     // connect CoinPlacer
 
+    [SerializeField] private Transform player;
+
     private void Start()
     {
         lastPosition = transform.position;  // 시작위치
@@ -22,6 +24,15 @@ public class Obstacle : MonoBehaviour
             SpawnObstacle();
         }
     }
+
+    private void Update()
+    {
+        if (Vector3.Distance(player.position, lastPosition) < 20f)      // 마지막 장애물위치가 20보다줄어들면 장애물 생성 반복
+            return;
+
+        SpawnObstacle();
+    }
+
 
     private void SpawnObstacle()
     {
