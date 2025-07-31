@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //Player.OnHitObstacle += () => { SoundManager.Play("Hit"); GameOver(); };
         StartGame();
     }
     private void Update()
