@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [Header("Other Managers")]
     public UIManager UIManager;
     public SoundManager SoundManager;
-    //public StageManager StageManager;//½ºÅ×ÀÌÁö Ãß°¡½Ã
+    //public StageManager StageManager;//ìŠ¤í…Œì´ì§€ ì¶”ê°€ì‹œ
     public Player Player;
 
     [Header("Game States")]
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public int totalScore = 0;
     public int maxHearts = 3;
 
-    // °ÔÀÓ ¼Óµµ Á¦¾î (¿¹: Á¡Á¡ »¡¶óÁö´Â ·± °ÔÀÓ)
+    // ê²Œì„ ì†ë„ ì œì–´ (ì˜ˆ: ì ì  ë¹¨ë¼ì§€ëŠ” ëŸ° ê²Œì„)
     [Header("Gameplay")]
     public float gameSpeed = 5f;
     public float speedIncreaseRate = 0.1f;
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // ½Ì±ÛÅæ ÃÊ±âÈ­
+        // ì‹±ê¸€í†¤ ì´ˆê¸°í™”
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     {
         if (isGameOver) return;
 
-        // °ÔÀÓ ¼Óµµ Áõ°¡
+        // ê²Œì„ ì†ë„ ì¦ê°€
         gameSpeed += speedIncreaseRate * Time.deltaTime;
         gameSpeed = Mathf.Min(gameSpeed, maxSpeed);
     }
@@ -53,28 +53,28 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         isGameOver = false;
-        //isPaused = false;//ÀÏ½ÃÁ¤Áö
+        //isPaused = false;//ì¼ì‹œì •ì§€
         totalScore = 0;
-        //currentHearts = maxHearts; //ÇöÀç Ã¼·Â ÃÊ±âÈ­
+        //currentHearts = maxHearts; //í˜„ì¬ ì²´ë ¥ ì´ˆê¸°í™”
         gameSpeed = 5f;
 
-        //UIManager ¿¡¼­ °ÔÀÓÈ­¸é »ó´ÜÀÇ Á¤º¸Ã¢
-        //UIManager È­¸é¿¡ Ç¥½ÃµÇ´Â Á¡¼ö¸¦ 0À¸·Î ÃÊ±âÈ­
-        //UIManager.UpdateHearts(currentHearts); // ÇÏÆ®°ª Á¡¼ö
+        //UIManager ì—ì„œ ê²Œì„í™”ë©´ ìƒë‹¨ì˜ ì •ë³´ì°½
+        //UIManager í™”ë©´ì— í‘œì‹œë˜ëŠ” ì ìˆ˜ë¥¼ 0ìœ¼ë¡œ ì´ˆê¸°í™”
+        //UIManager.UpdateHearts(currentHearts); // í•˜íŠ¸ê°’ ì ìˆ˜
 
-        //Player.EnableControls();// Ä³¸¯ÅÍ ÀÔ·Â
-        //StageManager.BeginStage();//»ç¿îµå ¸Å´ÏÀú ½ÃÀÛÀ½ 
-        //SoundManager.PlayBGM(); //ÇÃ·¹ÀÌ¾î »ç¿îµå
+        //Player.EnableControls();// ìºë¦­í„° ì…ë ¥
+        //StageManager.BeginStage();//ì‚¬ìš´ë“œ ë§¤ë‹ˆì € ì‹œì‘ìŒ 
+        //SoundManager.PlayBGM(); //í”Œë ˆì´ì–´ ì‚¬ìš´ë“œ
     }
-    // °ÔÀÓ ÀÏ½ÃÁ¤Áö
+    // ê²Œì„ ì¼ì‹œì •ì§€
     //public void PauseGame()
     //{
     //    isPaused = true;
     //    Time.timeScale = 0f;
-    //   // UIManager.ShowPausePanel(); //»ç¿îµå Á¤Áö ¿É¼Ç
-    //   // SoundManager.PlayPauseSound(); //ÇÃ·¹ÀÌ¾î Á¤Áö »ç¿îµå 
+    //   // UIManager.ShowPausePanel(); //ì‚¬ìš´ë“œ ì •ì§€ ì˜µì…˜
+    //   // SoundManager.PlayPauseSound(); //í”Œë ˆì´ì–´ ì •ì§€ ì‚¬ìš´ë“œ 
     //}
-    // °ÔÀÓ Àç½ÃÀÛ 
+    // ê²Œì„ ì¬ì‹œì‘ 
     //public void ResumeGame()
     //{
     //    isPaused = false;
@@ -85,10 +85,10 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameOver = true;
-        //Player.DisableControls(); //°ÔÀÓ µ¿ÀÛ Á¤Áö
-        //StageManager.StopStage(); //½ºÅ×ÀÌÁö Á¤Áö
-        //SoundManager.PlayGameOverSound(); //°ÔÀÓ¿À¹ö »ç¿îµå »ğÀÔ
-        // UIManager.ShowGameOverUI(); //°ÔÀÓ¿À¹öUIÃâ·Â
+        //Player.DisableControls(); //ê²Œì„ ë™ì‘ ì •ì§€
+        //StageManager.StopStage(); //ìŠ¤í…Œì´ì§€ ì •ì§€
+        //SoundManager.PlayGameOverSound(); //ê²Œì„ì˜¤ë²„ ì‚¬ìš´ë“œ ì‚½ì…
+        // UIManager.ShowGameOverUI(); //ê²Œì„ì˜¤ë²„UIì¶œë ¥
     }
 
     public void RestartGame()
@@ -106,12 +106,12 @@ public class GameManager : MonoBehaviour
 
     public void DamagePlayer(float damage)
     {
-        //currentHearts -= damage;//ÇöÀç ÇÏÆ®¼ö¿¡¼­ ÇÇÇØ °¨»ê
-        //currentHearts = Mathf.Clamp(currentHearts, 0, maxHearts);//Ã¼·ÂÀÌ À½¼ö·Î ¶³¾îÁö°Å³ª ÃÖ´ëÄ¡¸¦ ¾È³Ñµµ·Ï Á¦ÇÑ
+        //currentHearts -= damage;//í˜„ì¬ í•˜íŠ¸ìˆ˜ì—ì„œ í”¼í•´ ê°ì‚°
+        //currentHearts = Mathf.Clamp(currentHearts, 0, maxHearts);//ì²´ë ¥ì´ ìŒìˆ˜ë¡œ ë–¨ì–´ì§€ê±°ë‚˜ ìµœëŒ€ì¹˜ë¥¼ ì•ˆë„˜ë„ë¡ ì œí•œ
 
-        // UIManager.UpdateHealth(playerHealth); Ã¼·Â¹Ù ¾÷µ¥ÀÌÆ®
+        // UIManager.UpdateHealth(playerHealth); ì²´ë ¥ë°” ì—…ë°ì´íŠ¸
 
-        //if (playerHealth <= 0f && !isGameOver) //°ÔÀÓ¿À¹ö ·ÎÁ÷
+        //if (playerHealth <= 0f && !isGameOver) //ê²Œì„ì˜¤ë²„ ë¡œì§
         //{
         //    GameOver();
         //}
