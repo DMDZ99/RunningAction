@@ -44,18 +44,9 @@ public class Obstacle : MonoBehaviour
             gap = Mathf.Max(1f, gap); // 0으로했더니 슬라이드장애물이 겹침 -> 최소 거리
         }
 
+        Vector3 prefabLocalY = prefab.transform.position;
         Vector3 position = lastPosition + new Vector3(gap, 0f, 0f); // 최종위치계산
-        position.y = data.obstacleYPosition;    // 장애물 y값 할당
-
-        switch (data.kind)  // 장애물 종류에 따른 y값
-        {
-            case ObstacleKind.Jump:
-                position.y = -4f;
-                break;
-            case ObstacleKind.Slide:
-                position.y = 4f;
-                break;
-        }
+        position.y = prefabLocalY.y;    // 프리팹의 y좌표 사용
 
         GameObject obstacle = Instantiate(prefab, position, Quaternion.identity, parent); // 장애물 생성
 
@@ -66,5 +57,11 @@ public class Obstacle : MonoBehaviour
 
             lastPosition = position;    // 위치, 종류 저장
         lastKind = data.kind;
+
+        ItemSpawner itemSpawner = FindObjectOfType<ItemSpawner>();
+        if (itemSpawner != null)
+        {
+            itemSpawner.AddObstacle(obstacle.transform); // 장애물 위치를 아이템 스포너에 전달
+        }
     }
 }
