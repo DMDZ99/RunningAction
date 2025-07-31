@@ -165,7 +165,7 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("Coin"))
         {
-            Debug.Log(collision.tag);
+            Debug.Log(collision.tag); 
             if (collision.CompareTag("Coin"))
             {
                 Destroy(collision.gameObject);
@@ -179,7 +179,7 @@ public class Player : MonoBehaviour
             {
                 Destroy(collision.gameObject);
                 StartSuperRushMethod();
-                Invoke("EndSuperRushMethod", invincibleTime = 10);
+                Invoke("EndSuperRushMethod", invincibleTime = 2);
             }
         }
 
@@ -207,7 +207,7 @@ public class Player : MonoBehaviour
     {
         animator.SetBool("isRush", true);
         isInvincible = true;
-        extraSpeed = 10; 
+        extraSpeed = 2; 
     }
     private void EndSuperRushMethod() // rush가 끝나는 메소드
     {
