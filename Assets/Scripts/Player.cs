@@ -13,8 +13,10 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] private Collider2D slideCollider;
 
-    private Animator animator;
-    private Collider2D runnerCollider;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Collider2D runnerCollider;
+    [SerializeField] private SpriteRenderer playerOriginSprite;
+
     private int jumpCount = 0;
 
     private bool isGrounded; // 땅에 닿았는지 확인하는 변수
@@ -37,8 +39,9 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     public void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
-        runnerCollider = GetComponent<BoxCollider2D>(); //스크립트가 있는 오브젝트에 코라이더를 받아온다.
+        //animator = GetComponentInChildren<Animator>(); // 자녀에 있는 component를 가지고 올 때 GetComponentInChildren사용
+        //runnerCollider = GetComponent<BoxCollider2D>(); //스크립트가 있는 오브젝트에 코라이더를 받아온다.
+        //playerOriginSprite = GetComponentInChildren<SpriteRenderer>(); // SpriteRenderer의 초기값을 저장한다
     }
 
 
@@ -189,9 +192,21 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Obstacle"))
         {
-            // Debug.Log(collision.tag);
+             Debug.Log(collision.tag);
             if (collision.CompareTag("Obstacle"))
-                OnHitObstacle?.Invoke();
+            {
+                animator.SetTrigger("isDamege");
+                // bool은 실행과 끝을 다 체크해야 할때, trigger는 실행만 할 때 (돌아가는 transition을 부착해야한다)
+                // condition이 없으면 애니메이션이 끝나고 바로 다음동작 실행
+
+                Color color = playerOriginSprite.color;
+                color.a = 0.5f;
+                playerOriginSprite.color = color;
+                //색갈+무적
+                //Invoke로 다시돌아가는 로직 구현 (시간턴을 주는 코드)
+            }
+
+                
         }
     }
 }

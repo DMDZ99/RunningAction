@@ -250,6 +250,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   slideCollider: {fileID: 281570724}
+  animator: {fileID: 530977616}
+  runnerCollider: {fileID: 94774689}
+  playerOriginSprite: {fileID: 530977617}
 --- !u!1 &281570722
 GameObject:
   m_ObjectHideFlags: 0
