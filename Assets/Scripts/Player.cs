@@ -10,10 +10,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float forwardSpeed;
     [SerializeField] private float JumpForce;
     [SerializeField] private LayerMask platformLayer;
-    [SerializeField] private Collider2D slideCollider;
+    [SerializeField] private Collider2D slideCollider; // 슬라이드를 할 때 사용되는 collider를 가지고 오기위한 코드
 
     private Animator animator;
-    private Collider2D runnerCollider;
+    private Collider2D runnerCollider; // 스크립트를 가지고있는 오브젝트에 collider
     private int jumpCount = 0;
 
     private bool isGrounded; // 땅에 닿았는지 확인하는 변수
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>(); // 자식 component를 사용 할 때 GetComponentInChildren 사용
         runnerCollider = GetComponent<BoxCollider2D>(); //스크립트가 있는 오브젝트에 코라이더를 받아온다.
     }
 
@@ -132,7 +132,13 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("Obstacle"))
         {
             Debug.Log(collision.tag);
-
+            animator.SetTrigger("isDamege");
+            // 색갈+무적
+            // 인보크활용 (0.5~1초 시간 후 돌아온다) InVoke
         }
+        //animator.SetBool("isDamege", false);
+        // 장애물 충돌 애니메이션 작동
+        // 피격 > 이동 > 0.5 ~ 1초 간 무전 (이동 animation 투명도 조절)
+        // 피격에서 이동으로 갈때 Bool? Trigger?
     }
 }
