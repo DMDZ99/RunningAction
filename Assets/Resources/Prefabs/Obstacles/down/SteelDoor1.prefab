@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kind: 0
   distanceToNext: 10
+  obstacleYPosition: 0
+  coinYOffset: 6
 --- !u!95 &6900186279880358205
 Animator:
   serializedVersion: 5

@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kind: 1
   distanceToNext: 10
+  obstacleYPosition: 0
+  coinYOffset: -2.7
 --- !u!60 &3064489524224757988
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -8,23 +8,23 @@ public class CoinPlacer : MonoBehaviour
     [SerializeField] private Transform coinParent;
 
     [SerializeField] private float coinSpacing = 1f;    // 코인 간격
-    [SerializeField] private int coinCount = 1;         // 장애물하나당 코인 개수 = 1
+    [SerializeField] private int coinCount = 5;         // 장애물하나당 코인 개수 = 1
 
-    public void PlaceCoinJump(Vector3 obstaclePosition)    // jumpObstacle's coin
+    public void PlaceCoinJump(Vector3 obstaclePosition, float coinYOffset)    // jumpObstacle's coin
     {
         for(int i = 0; i < coinCount; i++)
         {
-            Vector3 coinposition = obstaclePosition + new Vector3(i * coinSpacing, 1.5f, 0);   // coin place
+            Vector3 coinposition = obstaclePosition + new Vector3(i * coinSpacing, coinYOffset, 0);   // coin place
             GameObject prefab = GetCoinLine();
             Instantiate(prefab, coinposition, Quaternion.identity, coinParent);
         }
     }
 
-    public void PlaceCoinSlide(Vector3 obstaclePosition)   // slideObstacle's coin
+    public void PlaceCoinSlide(Vector3 obstaclePosition, float coinYOffset)   // slideObstacle's coin
     {
         for (int i = 0;i < coinCount; i++)
         {
-            Vector3 coinposition = obstaclePosition + new Vector3(i * coinSpacing, -1.5f, 0);   // coin place
+            Vector3 coinposition = obstaclePosition + new Vector3(i * coinSpacing, coinYOffset, 0);   // coin place
             GameObject prefab = GetCoinLine();
             Instantiate(prefab, coinposition, Quaternion.identity, coinParent);
         }

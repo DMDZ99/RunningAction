@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 122073844297248819}
   - component: {fileID: 3644555465576106582}
+  - component: {fileID: 6733198114448551762}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Untagged
@@ -58,3 +59,23 @@ MonoBehaviour:
   - {fileID: 6337401809149753651, guid: 3634734575a9f4f488fbdb53575115d9, type: 3}
   parent: {fileID: 0}
   initialCount: 5
+  coinPlacer: {fileID: 6733198114448551762}
+--- !u!114 &6733198114448551762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392344530262238125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26cc3a6dc3ba8345b370fe326ab68e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefabs:
+  - {fileID: 3495787227360520832, guid: 9303dac841648a64fbc492c1f38a748d, type: 3}
+  - {fileID: 1193235133272280770, guid: 7d60ca596d47406409b5230918d8ab0a, type: 3}
+  - {fileID: 7053046318404190243, guid: 3ef36e63f7cd4954ab3e4a4f682d699a, type: 3}
+  coinParent: {fileID: 0}
+  coinSpacing: 1
+  coinCount: 1

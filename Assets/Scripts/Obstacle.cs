@@ -39,10 +39,11 @@ public class Obstacle : MonoBehaviour
 
         if (lastKind == ObstacleKind.Slide && data.kind == ObstacleKind.Slide)
         {
-            gap = Mathf.Max(1.5f, data.distanceToNext); // 0으로했더니 슬라이드장애물이 겹침 -> 최소 거리
+            gap = Mathf.Max(1f, gap); // 0으로했더니 슬라이드장애물이 겹침 -> 최소 거리
         }
 
         Vector3 position = lastPosition + new Vector3(gap, 0f, 0f); // 최종위치계산
+        position.y = data.obstacleYPosition;    // 장애물 y값 할당
 
         switch (data.kind)  // 장애물 종류에 따른 y값
         {
@@ -57,9 +58,9 @@ public class Obstacle : MonoBehaviour
         GameObject obstacle = Instantiate(prefab, position, Quaternion.identity, parent); // 장애물 생성
 
         if (data.kind == ObstacleKind.Jump)
-            coinPlacer.PlaceCoinJump(obstacle.transform.position);      // 코인 종류별로 장애물 위치에
+            coinPlacer.PlaceCoinJump(obstacle.transform.position, data.coinYOffset);      // 코인 종류별로 장애물 위치에
         else if (data.kind == ObstacleKind.Slide)
-            coinPlacer.PlaceCoinSlide(obstacle.transform.position);
+            coinPlacer.PlaceCoinSlide(obstacle.transform.position, data.coinYOffset);
 
             lastPosition = position;    // 위치, 종류 저장
         lastKind = data.kind;

@@ -153,3 +153,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kind: 0
   distanceToNext: 5
+  obstacleYPosition: 0
+  coinYOffset: 2.5
