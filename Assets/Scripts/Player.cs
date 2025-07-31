@@ -179,7 +179,7 @@ public class Player : MonoBehaviour
             {
                 Destroy(collision.gameObject);
                 StartSuperRushMethod();
-                Invoke("EndSuperRushMethod", invincibleTime = 2);
+                Invoke("EndSuperRushMethod", invincibleTime = 10);
             }
         }
 
@@ -207,7 +207,7 @@ public class Player : MonoBehaviour
     {
         animator.SetBool("isRush", true);
         isInvincible = true;
-        extraSpeed = 2; 
+        extraSpeed = 6; 
     }
     private void EndSuperRushMethod() // rush가 끝나는 메소드
     {
