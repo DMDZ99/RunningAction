@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class HealthSystem : MonoBehaviour
 {
     public Slider healthSlider;  // 체력바 UI
-    public float maxHealth = 100f;
+    public float maxHealth = 500f;
     public float currentHealth;
-    public float decreaseRate = 5f; // 초당 감소량
+    public float decreaseRate = 10f; // 초당 감소량
 
     private bool isDead = false;
 
