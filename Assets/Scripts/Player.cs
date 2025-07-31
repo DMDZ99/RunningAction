@@ -89,10 +89,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    private float extraSpeed;
+
     private void RunnerMovementMethod()
     {
         Vector3 baseForwardSpeed = rigidbody2D.velocity;
-        baseForwardSpeed.x = forwardSpeed;
+        baseForwardSpeed.x = forwardSpeed + extraSpeed;
 
         rigidbody2D.velocity = baseForwardSpeed;
     }
@@ -161,12 +163,24 @@ public class Player : MonoBehaviour
                 // Invoke의 사용법 [ Invoke("함수이름", 딜레이_초); ] 이제 알파 값을 조절하는 함수를 구현해야한다.
             }
         }
-        else if (collision.CompareTag("Coin"))
+
+        if (collision.CompareTag("Coin"))
         {
             Debug.Log(collision.tag);
             if (collision.CompareTag("Coin"))
             {
-                
+                Destroy(collision.gameObject);
+            }
+        }
+
+        if (collision.CompareTag("RushItem"))
+        {
+            Debug.Log(collision.tag);
+            if (collision.CompareTag("RushItem"))
+            {
+                Destroy(collision.gameObject);
+                StartSuperRushMethod();
+                Invoke("EndSuperRushMethod", invincibleTime = 10);
             }
         }
 
@@ -189,5 +203,17 @@ public class Player : MonoBehaviour
         playerOriginSprite.color = color;
         // 무적 false
         isInvincible = false;
+    }
+    private void StartSuperRushMethod() // 
+    {
+        animator.SetBool("isRush", true);
+        isInvincible = true;
+        extraSpeed = 10;
+    }
+    private void EndSuperRushMethod() // 
+    {
+        animator.SetBool("isRush", false);
+        isInvincible = false;
+        extraSpeed = 0;
     }
 }
