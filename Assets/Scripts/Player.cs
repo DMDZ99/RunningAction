@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer playerOriginSprite;
 
     private int jumpCount = 0;
+    private float extraSpeed;
 
     private bool isInvincible; // 무적을 판단하는 변수
     private bool isGrounded; // 땅에 닿았는지 확인하는 변수
@@ -88,8 +89,6 @@ public class Player : MonoBehaviour
             jumpCount = 0;
         }
     }
-
-    private float extraSpeed;
 
     private void RunnerMovementMethod()
     {
@@ -204,13 +203,13 @@ public class Player : MonoBehaviour
         // 무적 false
         isInvincible = false;
     }
-    private void StartSuperRushMethod() // 
+    private void StartSuperRushMethod() // rush가 시작되는 메소드
     {
         animator.SetBool("isRush", true);
         isInvincible = true;
-        extraSpeed = 10;
+        extraSpeed = 10; 
     }
-    private void EndSuperRushMethod() // 
+    private void EndSuperRushMethod() // rush가 끝나는 메소드
     {
         animator.SetBool("isRush", false);
         isInvincible = false;
