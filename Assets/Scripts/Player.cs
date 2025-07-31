@@ -96,29 +96,7 @@ public class Player : MonoBehaviour
 
     private void RunnerJumpMethod()
     {
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    if (Mathf.Abs(rigidbody2D.velocity.y) < 0.01f) // Mathf.Abs 절대값을 구할 때 사용한다
-        //    {
-        //        jumpCount = 1;
-        //    }
-        //    else
-        //    {
-        //        jumpCount++;
-        //    }
-
-        //    if (jumpCount <= 2)
-        //    {
-        //        animator.SetBool("isJump", true);
-        //        rigidbody2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
-        //        isJumping = true; // 점프를 실행하면 bool 값 isJumping은 참
-        //    }
-
-        //    // rigidbody2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse); 기본 점프 로직
-        //    // ForceMode2D.Impulse 좀 더 현실적인 점프를 구현하는 코드
-        //    // && rigidbody2D.velocity.y == 0 무한 점프를 방지하기위한 조건식 (하지만 실패했다)
-        //    // && Mathf.Approximately(rigidbody2D.velocity.y, 0) 무한 점프를 방지하기위한 조건식 (하지만 실패했다)
-        //}
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isGrounded)
