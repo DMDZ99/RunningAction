@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7094792396095599111}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.93, y: -0.862, z: 0}
+  m_LocalPosition: {x: 0.93, y: -5, z: 0}
   m_LocalScale: {x: 9, y: 9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -150,5 +150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kind: 0
   distanceToNext: 10
-  obstacleYPosition: 0
+  obstacleYPosition: -5
   coinYOffset: 6
+  isHole: 0

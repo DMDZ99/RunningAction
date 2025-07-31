@@ -111,7 +111,12 @@ public class Item : MonoBehaviour
     //private void HealPlayer(GameObject player)
     //{
     //    // Heal player (player MaxHp's 30% or 40%?)
+    //    currentHearts += (int)(maxHearts * 0.3);
+        
+
     //    // Do not exceed max HP 
+    //    if (currentHearts >= maxHearts)
+    //        currentHearts = maxHearts;
     //}
 
     private void GetCoin(GameObject player)
