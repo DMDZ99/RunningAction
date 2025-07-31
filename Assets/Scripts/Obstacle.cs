@@ -50,10 +50,10 @@ public class Obstacle : MonoBehaviour
         switch (data.kind)  // 장애물 종류에 따른 y값
         {
             case ObstacleKind.Jump:
-                position.y = 3.5f;
+                position.y = -4f;
                 break;
             case ObstacleKind.Slide:
-                position.y = -3f;
+                position.y = 4f;
                 break;
         }
 
