@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer playerOriginSprite;
 
     private int jumpCount = 0;
-    private float extraSpeed;
+    private float extraSpeed; // 추가 스피드
 
     private bool isInvincible; // 무적을 판단하는 변수
     private bool isGrounded; // 땅에 닿았는지 확인하는 변수
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
     private void RunnerMovementMethod()
     {
         Vector3 baseForwardSpeed = rigidbody2D.velocity;
-        baseForwardSpeed.x = forwardSpeed + extraSpeed;
+        baseForwardSpeed.x = forwardSpeed + extraSpeed; // 추가 스피드로 Rush스피드를 제어할 수 있다.
 
         rigidbody2D.velocity = baseForwardSpeed;
     }
