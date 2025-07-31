@@ -62,43 +62,10 @@ public class Player : MonoBehaviour
         RunnerSlideMethod();
     }
 
-    //private void FixedUpdate() //고정으로 0.2초 마다 실행한다.
-    //{
-    //    // 땅에 닿았는지 확인하는 방법 raycast, 에디터 상에서만 Ray를 그려주는 함수
-
-    //    Debug.DrawRay(rigidbody2D.position, Vector3.down, new Color(0, 1, 0));
-
-    //    RaycastHit2D rayHit = Physics2D.Raycast(rigidbody2D.position, Vector3.down, 2.0f, platformLayer);
-
-    //    if (rayHit.collider != null && rigidbody2D.velocity.y < 0)
-    //    {
-    //        //Debug.Log(rayHit.collider.name);
-    //        //Debug.Log(rayHit.distance);
-
-    //        if (rayHit.distance < 1.05f) // rayHit에 시간 턴을 주는 조건식
-    //        {
-    //            isGrounded = true;
-    //        }
-    //        else
-    //        {
-    //            isGrounded = false;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        isGrounded = false;
-    //    }
-
-    //    if (isGrounded && isJumping)
-    //    {
-    //        animator.SetBool("isJump", false);
-    //        isJumping = false;
-    //        jumpCount = 0;
-    //    }
-
-    //}
-    private void FixedUpdate()
+    
+    private void FixedUpdate()//고정으로 0.2초 마다 실행한다.
     {
+        // 땅에 닿았는지 확인하는 방법 raycast, 에디터 상에서만 Ray를 그려주는 함수
         Debug.DrawRay(rigidbody2D.position, Vector3.down, new Color(0, 1, 0));
         RaycastHit2D rayHit = Physics2D.Raycast(rigidbody2D.position, Vector3.down, 2.0f, platformLayer);
 
