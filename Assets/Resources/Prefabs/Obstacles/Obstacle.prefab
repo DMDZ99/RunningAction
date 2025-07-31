@@ -57,6 +57,7 @@ MonoBehaviour:
   - {fileID: 3050235596147395266, guid: 9ff5db67528d3f2469cf4623aa0e68f3, type: 3}
   - {fileID: 455045159635439768, guid: 93a41a35c975a2047b9bc0c8226c783a, type: 3}
   - {fileID: 6337401809149753651, guid: 3634734575a9f4f488fbdb53575115d9, type: 3}
+  - {fileID: 1532808580645139727, guid: c8f51fa7549868441b46b12b5beadc7e, type: 3}
   parent: {fileID: 0}
   initialCount: 5
   coinPlacer: {fileID: 6733198114448551762}

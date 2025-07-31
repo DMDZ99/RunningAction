@@ -30,10 +30,12 @@ public class Obstacle : MonoBehaviour
         ObstacleData data = prefab.GetComponent<ObstacleData>();
 
         // 구멍함정
-        //if (data.soloObstacle)
-        //{
-
-        //}
+        if (data.kind == ObstacleKind.Hole)
+        {
+            lastPosition += new Vector3(data.distanceToNext, 0f, 0f);   // 위치만 비운다.
+            lastKind = data.kind;
+            return;
+        }
 
         float gap = data.distanceToNext;    // 간격 초기화
 
