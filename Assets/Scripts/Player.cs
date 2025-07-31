@@ -62,43 +62,10 @@ public class Player : MonoBehaviour
         RunnerSlideMethod();
     }
 
-    //private void FixedUpdate() //고정으로 0.2초 마다 실행한다.
-    //{
-    //    // 땅에 닿았는지 확인하는 방법 raycast, 에디터 상에서만 Ray를 그려주는 함수
-
-    //    Debug.DrawRay(rigidbody2D.position, Vector3.down, new Color(0, 1, 0));
-
-    //    RaycastHit2D rayHit = Physics2D.Raycast(rigidbody2D.position, Vector3.down, 2.0f, platformLayer);
-
-    //    if (rayHit.collider != null && rigidbody2D.velocity.y < 0)
-    //    {
-    //        //Debug.Log(rayHit.collider.name);
-    //        //Debug.Log(rayHit.distance);
-
-    //        if (rayHit.distance < 1.05f) // rayHit에 시간 턴을 주는 조건식
-    //        {
-    //            isGrounded = true;
-    //        }
-    //        else
-    //        {
-    //            isGrounded = false;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        isGrounded = false;
-    //    }
-
-    //    if (isGrounded && isJumping)
-    //    {
-    //        animator.SetBool("isJump", false);
-    //        isJumping = false;
-    //        jumpCount = 0;
-    //    }
-
-    //}
-    private void FixedUpdate()
+    
+    private void FixedUpdate()//고정으로 0.2초 마다 실행한다.
     {
+        // 땅에 닿았는지 확인하는 방법 raycast, 에디터 상에서만 Ray를 그려주는 함수
         Debug.DrawRay(rigidbody2D.position, Vector3.down, new Color(0, 1, 0));
         RaycastHit2D rayHit = Physics2D.Raycast(rigidbody2D.position, Vector3.down, 2.0f, platformLayer);
 
@@ -129,29 +96,7 @@ public class Player : MonoBehaviour
 
     private void RunnerJumpMethod()
     {
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    if (Mathf.Abs(rigidbody2D.velocity.y) < 0.01f) // Mathf.Abs 절대값을 구할 때 사용한다
-        //    {
-        //        jumpCount = 1;
-        //    }
-        //    else
-        //    {
-        //        jumpCount++;
-        //    }
-
-        //    if (jumpCount <= 2)
-        //    {
-        //        animator.SetBool("isJump", true);
-        //        rigidbody2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
-        //        isJumping = true; // 점프를 실행하면 bool 값 isJumping은 참
-        //    }
-
-        //    // rigidbody2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse); 기본 점프 로직
-        //    // ForceMode2D.Impulse 좀 더 현실적인 점프를 구현하는 코드
-        //    // && rigidbody2D.velocity.y == 0 무한 점프를 방지하기위한 조건식 (하지만 실패했다)
-        //    // && Mathf.Approximately(rigidbody2D.velocity.y, 0) 무한 점프를 방지하기위한 조건식 (하지만 실패했다)
-        //}
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isGrounded)
