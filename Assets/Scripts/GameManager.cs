@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        //Player.OnHitObstacle += () => { SoundManager.Play("Hit"); GameOver(); };
         StartGame();
     }
     private void Update()
@@ -46,8 +47,10 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
 
         // 게임 속도 증가
-        gameSpeed += speedIncreaseRate * Time.deltaTime;
-        gameSpeed = Mathf.Min(gameSpeed, maxSpeed);
+        //gameSpeed += speedIncreaseRate * Time.deltaTime;
+        //gameSpeed = Mathf.Min(gameSpeed, maxSpeed);
+        gameSpeed = Mathf.Min(gameSpeed + speedIncreaseRate * Time.deltaTime, maxSpeed);
+        Player.SetRunSpeed(gameSpeed);
     }
 
     public void StartGame()
@@ -57,6 +60,9 @@ public class GameManager : MonoBehaviour
         totalScore = 0;
         //currentHearts = maxHearts; //현재 체력 초기화
         gameSpeed = 5f;
+
+        Player.ResetState();
+        Player.EnableControls();
 
         //UIManager 에서 게임화면 상단의 정보창
         //UIManager 화면에 표시되는 점수를 0으로 초기화
@@ -85,7 +91,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameOver = true;
-        //Player.DisableControls(); //게임 동작 정지
+        Player.DisableControls(); //게임 동작 정지
         //StageManager.StopStage(); //스테이지 정지
         //SoundManager.PlayGameOverSound(); //게임오버 사운드 삽입
         // UIManager.ShowGameOverUI(); //게임오버UI출력

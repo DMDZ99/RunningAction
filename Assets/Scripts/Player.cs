@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,50 +17,94 @@ public class Player : MonoBehaviour
     private Collider2D runnerCollider;
     private int jumpCount = 0;
 
-    private bool isGrounded; // ¶¥¿¡ ´ê¾Ò´ÂÁö È®ÀÎÇÏ´Â º¯¼ö
-    private bool isJumping; // Á¡ÇÁ¸¦ ÇÏ°í ÀÖ´ÂÁö È®ÀÎÇÏ´Â º¯¼ö
+    private bool isGrounded; // ë•…ì— ë‹¿ì•˜ëŠ”ì§€ í™•ì¸í•˜ëŠ” ë³€ìˆ˜
+    private bool isJumping; // ì í”„ë¥¼ í•˜ê³  ìˆëŠ”ì§€ í™•ì¸í•˜ëŠ” ë³€ìˆ˜
 
+    private bool controlsEnabled = true;
+    public event Action OnHitObstacle;
+    public void SetRunSpeed(float speed) => forwardSpeed = speed;
+    public void EnableControls() => controlsEnabled = true;
+    public void DisableControls() => controlsEnabled = false;
+    public void ResetState()
+    {
+        jumpCount = 0;
+        isJumping = false;
+        animator.SetBool("isJump", false);
+        animator.SetBool("isSlide", false);
+        slideCollider.enabled = false;
+        runnerCollider.enabled = true;
+    }
     // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        runnerCollider = GetComponent<BoxCollider2D>(); //½ºÅ©¸³Æ®°¡ ÀÖ´Â ¿ÀºêÁ§Æ®¿¡ ÄÚ¶óÀÌ´õ¸¦ ¹Ş¾Æ¿Â´Ù.
+        runnerCollider = GetComponent<BoxCollider2D>(); //ìŠ¤í¬ë¦½íŠ¸ê°€ ìˆëŠ” ì˜¤ë¸Œì íŠ¸ì— ì½”ë¼ì´ë”ë¥¼ ë°›ì•„ì˜¨ë‹¤.
+    }
+
+
+    public void Start()
+    {
+       // animator = GetComponentInChildren<Animator>();
+        //runnerCollider = GetComponent<BoxCollider2D>(); //ìŠ¤í¬ë¦½íŠ¸ê°€ ìˆëŠ” ì˜¤ë¸Œì íŠ¸ì— ì½”ë¼ì´ë”ë¥¼ ë°›ì•„ì˜¨ë‹¤.
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        // ¾ÕÀ¸·Î °¡´Â ·ÎÁ÷
+        if (!controlsEnabled) return;
+        // ì•ìœ¼ë¡œ ê°€ëŠ” ë¡œì§
         RunnerMovementMethod();
 
-        //Á¡ÇÁ ·ÎÁ÷
+        //ì í”„ ë¡œì§
         RunnerJumpMethod();
 
-        // ½½¶óÀÌµå ·ÎÁ÷
+        // ìŠ¬ë¼ì´ë“œ ë¡œì§
         RunnerSlideMethod();
     }
 
-    private void FixedUpdate() //°íÁ¤À¸·Î 0.2ÃÊ ¸¶´Ù ½ÇÇàÇÑ´Ù.
+    //private void FixedUpdate() //ê³ ì •ìœ¼ë¡œ 0.2ì´ˆ ë§ˆë‹¤ ì‹¤í–‰í•œë‹¤.
+    //{
+    //    // ë•…ì— ë‹¿ì•˜ëŠ”ì§€ í™•ì¸í•˜ëŠ” ë°©ë²• raycast, ì—ë””í„° ìƒì—ì„œë§Œ Rayë¥¼ ê·¸ë ¤ì£¼ëŠ” í•¨ìˆ˜
+
+    //    Debug.DrawRay(rigidbody2D.position, Vector3.down, new Color(0, 1, 0));
+
+    //    RaycastHit2D rayHit = Physics2D.Raycast(rigidbody2D.position, Vector3.down, 2.0f, platformLayer);
+
+    //    if (rayHit.collider != null && rigidbody2D.velocity.y < 0)
+    //    {
+    //        //Debug.Log(rayHit.collider.name);
+    //        //Debug.Log(rayHit.distance);
+
+    //        if (rayHit.distance < 1.05f) // rayHitì— ì‹œê°„ í„´ì„ ì£¼ëŠ” ì¡°ê±´ì‹
+    //        {
+    //            isGrounded = true;
+    //        }
+    //        else
+    //        {
+    //            isGrounded = false;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        isGrounded = false;
+    //    }
+
+    //    if (isGrounded && isJumping)
+    //    {
+    //        animator.SetBool("isJump", false);
+    //        isJumping = false;
+    //        jumpCount = 0;
+    //    }
+
+    //}
+    private void FixedUpdate()
     {
-        // ¶¥¿¡ ´ê¾Ò´ÂÁö È®ÀÎÇÏ´Â ¹æ¹ı raycast, ¿¡µğÅÍ »ó¿¡¼­¸¸ Ray¸¦ ±×·ÁÁÖ´Â ÇÔ¼ö
-
         Debug.DrawRay(rigidbody2D.position, Vector3.down, new Color(0, 1, 0));
-
         RaycastHit2D rayHit = Physics2D.Raycast(rigidbody2D.position, Vector3.down, 2.0f, platformLayer);
 
         if (rayHit.collider != null && rigidbody2D.velocity.y < 0)
         {
-            //Debug.Log(rayHit.collider.name);
-            //Debug.Log(rayHit.distance);
-
-            if (rayHit.distance < 1.05f) // rayHit¿¡ ½Ã°£ ÅÏÀ» ÁÖ´Â Á¶°Ç½Ä
-            {
-                isGrounded = true;
-            }
-            else
-            {
-                isGrounded = false;
-            }
+            isGrounded = rayHit.distance < 1.05f;
         }
         else
         {
@@ -72,7 +117,6 @@ public class Player : MonoBehaviour
             isJumping = false;
             jumpCount = 0;
         }
-
     }
 
     private void RunnerMovementMethod()
@@ -85,28 +129,42 @@ public class Player : MonoBehaviour
 
     private void RunnerJumpMethod()
     {
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    if (Mathf.Abs(rigidbody2D.velocity.y) < 0.01f) // Mathf.Abs ì ˆëŒ€ê°’ì„ êµ¬í•  ë•Œ ì‚¬ìš©í•œë‹¤
+        //    {
+        //        jumpCount = 1;
+        //    }
+        //    else
+        //    {
+        //        jumpCount++;
+        //    }
+
+        //    if (jumpCount <= 2)
+        //    {
+        //        animator.SetBool("isJump", true);
+        //        rigidbody2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+        //        isJumping = true; // ì í”„ë¥¼ ì‹¤í–‰í•˜ë©´ bool ê°’ isJumpingì€ ì°¸
+        //    }
+
+        //    // rigidbody2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse); ê¸°ë³¸ ì í”„ ë¡œì§
+        //    // ForceMode2D.Impulse ì¢€ ë” í˜„ì‹¤ì ì¸ ì í”„ë¥¼ êµ¬í˜„í•˜ëŠ” ì½”ë“œ
+        //    // && rigidbody2D.velocity.y == 0 ë¬´í•œ ì í”„ë¥¼ ë°©ì§€í•˜ê¸°ìœ„í•œ ì¡°ê±´ì‹ (í•˜ì§€ë§Œ ì‹¤íŒ¨í–ˆë‹¤)
+        //    // && Mathf.Approximately(rigidbody2D.velocity.y, 0) ë¬´í•œ ì í”„ë¥¼ ë°©ì§€í•˜ê¸°ìœ„í•œ ì¡°ê±´ì‹ (í•˜ì§€ë§Œ ì‹¤íŒ¨í–ˆë‹¤)
+        //}
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (Mathf.Abs(rigidbody2D.velocity.y) < 0.01f) // Mathf.Abs Àı´ë°ªÀ» ±¸ÇÒ ¶§ »ç¿ëÇÑ´Ù
-            {
+            if (isGrounded)
                 jumpCount = 1;
-            }
             else
-            {
                 jumpCount++;
-            }
 
             if (jumpCount <= 2)
             {
                 animator.SetBool("isJump", true);
                 rigidbody2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
-                isJumping = true; // Á¡ÇÁ¸¦ ½ÇÇàÇÏ¸é bool °ª isJumpingÀº Âü
+                isJumping = true;
             }
-
-            // rigidbody2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse); ±âº» Á¡ÇÁ ·ÎÁ÷
-            // ForceMode2D.Impulse Á» ´õ Çö½ÇÀûÀÎ Á¡ÇÁ¸¦ ±¸ÇöÇÏ´Â ÄÚµå
-            // && rigidbody2D.velocity.y == 0 ¹«ÇÑ Á¡ÇÁ¸¦ ¹æÁöÇÏ±âÀ§ÇÑ Á¶°Ç½Ä (ÇÏÁö¸¸ ½ÇÆĞÇß´Ù)
-            // && Mathf.Approximately(rigidbody2D.velocity.y, 0) ¹«ÇÑ Á¡ÇÁ¸¦ ¹æÁöÇÏ±âÀ§ÇÑ Á¶°Ç½Ä (ÇÏÁö¸¸ ½ÇÆĞÇß´Ù)
         }
     }
 
@@ -115,7 +173,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             animator.SetBool("isSlide", true);
-            slideCollider.enabled = true; // component¸¦ ²ô°í Å°°íÇÏ´Â ÄÚµå.
+            slideCollider.enabled = true; // componentë¥¼ ë„ê³  í‚¤ê³ í•˜ëŠ” ì½”ë“œ.
             runnerCollider.enabled = false;
         }
 
@@ -131,8 +189,9 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Obstacle"))
         {
-            Debug.Log(collision.tag);
-
+            // Debug.Log(collision.tag);
+            if (collision.CompareTag("Obstacle"))
+                OnHitObstacle?.Invoke();
         }
     }
 }
