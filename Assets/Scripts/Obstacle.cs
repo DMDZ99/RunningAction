@@ -11,6 +11,8 @@ public class Obstacle : MonoBehaviour
     private Vector3 lastPosition;
     private ObstacleKind lastKind = ObstacleKind.Jump;  // 마지막장애물 종류 = 점프
 
+    [SerializeField] private CoinPlacer coinPlacer;     // connect CoinPlacer
+
     private void Start()
     {
         lastPosition = transform.position;  // 시작위치
@@ -48,13 +50,18 @@ public class Obstacle : MonoBehaviour
                 position.y = 3.5f;
                 break;
             case ObstacleKind.Slide:
-                position.y = 1f;
+                position.y = -3f;
                 break;
         }
 
-        Instantiate(prefab, position, Quaternion.identity, parent); // 생성
+        GameObject obstacle = Instantiate(prefab, position, Quaternion.identity, parent); // 장애물 생성
 
-        lastPosition = position;    // 위치, 종류 저장
-        lastKind =data.kind;
+        if (data.kind == ObstacleKind.Jump)
+            coinPlacer.PlaceCoinJump(obstacle.transform.position);      // 코인 종류별로 장애물 위치에
+        else if (data.kind == ObstacleKind.Slide)
+            coinPlacer.PlaceCoinSlide(obstacle.transform.position);
+
+            lastPosition = position;    // 위치, 종류 저장
+        lastKind = data.kind;
     }
 }
