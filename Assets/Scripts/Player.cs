@@ -164,14 +164,14 @@ public class Player : MonoBehaviour
             }
         }
 
-        //if (collision.CompareTag("Coin"))
-        //{
-        //    Debug.Log(collision.tag);
-        //    if (collision.CompareTag("Coin"))
-        //    {
-
-        //    }
-        //}
+        if (collision.CompareTag("Coin"))
+        {
+            Debug.Log(collision.tag);
+            if (collision.CompareTag("Coin"))
+            {
+                Destroy(collision.gameObject);
+            }
+        }
 
         if (collision.CompareTag("RushItem"))
         {
@@ -204,13 +204,13 @@ public class Player : MonoBehaviour
         // 무적 false
         isInvincible = false;
     }
-    private void StartSuperRushMethod()
+    private void StartSuperRushMethod() // 
     {
         animator.SetBool("isRush", true);
         isInvincible = true;
         extraSpeed = 10;
     }
-    private void EndSuperRushMethod()
+    private void EndSuperRushMethod() // 
     {
         animator.SetBool("isRush", false);
         isInvincible = false;
