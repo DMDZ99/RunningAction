@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("Obstacle"))
         {
-             Debug.Log(collision.tag);
+            Debug.Log(collision.tag);
             if (collision.CompareTag("Obstacle"))
             {
                 SpriteDamageMethod();
@@ -161,6 +161,15 @@ public class Player : MonoBehaviour
                 // Invoke의 사용법 [ Invoke("함수이름", 딜레이_초); ] 이제 알파 값을 조절하는 함수를 구현해야한다.
             }
         }
+        else if (collision.CompareTag("Coin"))
+        {
+            Debug.Log(collision.tag);
+            if (collision.CompareTag("Coin"))
+            {
+                
+            }
+        }
+
     }
     // 장애물 충돌 시 구현된는 애니메이션에 필요한 메소드
     private void SpriteDamageMethod() // 출동 시 알파 값 조정
