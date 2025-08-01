@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private bool isJumping; // 점프를 하고 있는지 확인하는 변수
 
     private bool controlsEnabled = true;
+
     //public event Action OnHitObstacle;
     public void SetRunSpeed(float speed) => forwardSpeed = speed;
     public void EnableControls() => controlsEnabled = true;
