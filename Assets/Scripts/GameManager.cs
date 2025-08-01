@@ -103,6 +103,43 @@ public class GameManager : MonoBehaviour
         SceneManager.GetActiveScene().name);
     }
 
+    /*public void ApplyItemEffect(Item item, Player player)
+    {
+        switch (item.type)
+        {
+            case ItemType.Rush:
+                player.StartSuperRushMethod(item.effectValue); // 예: 5f = 5초 지속
+                break;
+            case ItemType.Shield:
+                player.StartShieldMethod(item.effectValue);
+                break;
+            case ItemType.Magnet:
+                player.StartMagnetMethod(item.effectValue);
+                break;
+            case ItemType.Potion:
+                player.Heal(item.effectValue);
+                break;
+            case ItemType.Coin:
+                AddScore(GetCoinScore(item.coinType));
+                break;
+                // 필요시 추가 (ex. 새로운 아이템)
+        }
+    }
+
+    private int GetCoinScore(CoinType coinType)
+    {
+        switch (coinType)
+        {
+            case CoinType.Copper: return 1;
+            case CoinType.Silver: return 10;
+            case CoinType.Gold: return 50;
+            default: return 0;
+        }
+    }*/
+
+
+
+
     public void AddScore(int amount)
     {
         totalScore += amount;
