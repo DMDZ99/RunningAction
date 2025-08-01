@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour
 {
@@ -66,47 +61,37 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("Obstacle"))
         {
-            
-            if (collision.CompareTag("Obstacle"))
-            {
-                // HP 깎이는 메소드 추가해야 함
-                GameManager.Instance.TakeDamage(10);
+            // HP 깎이는 메소드 추가해야 함
+            GameManager.Instance.TakeDamage(10);
 
-                GameManager.Instance.SpriteDamageMethod();
-                GameManager.Instance.Invoke("SpriteResetMethod", GameManager.Instance.invincibleTime);
+            GameManager.Instance.SpriteDamageMethod();
+            GameManager.Instance.Invoke("SpriteResetMethod", GameManager.Instance.invincibleTime);
 
-                //animator.SetTrigger("isDamege");
-                // bool은 실행과 끝을 다 체크해야 할때, trigger는 실행만 할 때 (돌아가는 transition을 부착해야한다)
-                // condition이 없으면 애니메이션이 끝나고 바로 다음동작 실행
+            //animator.SetTrigger("isDamege");
+            // bool은 실행과 끝을 다 체크해야 할때, trigger는 실행만 할 때 (돌아가는 transition을 부착해야한다)
+            // condition이 없으면 애니메이션이 끝나고 바로 다음동작 실행
 
-                // Color color = playerOriginSprite.color;
-                //color.a = 0.5f;
-                //playerOriginSprite.color = color;
-                // 색갈+무적
-                // Invoke로 다시돌아가는 로직 구현 (시간턴을 주는 코드)
-                // Invoke의 사용법 [ Invoke("함수이름", 딜레이_초); ] 이제 알파 값을 조절하는 함수를 구현해야한다.
-            }
+            // Color color = playerOriginSprite.color;
+            //color.a = 0.5f;
+            //playerOriginSprite.color = color;
+            // 색갈+무적
+            // Invoke로 다시돌아가는 로직 구현 (시간턴을 주는 코드)
+            // Invoke의 사용법 [ Invoke("함수이름", 딜레이_초); ] 이제 알파 값을 조절하는 함수를 구현해야한다.
+
         }
 
         if (collision.CompareTag("Coin"))
         {
-            
-            if (collision.CompareTag("Coin"))
-            {
-                Destroy(collision.gameObject);
-                // 점수가 늘어나는 메소드 추가해야함
-            }
+            Destroy(collision.gameObject);
+            // 점수가 늘어나는 메소드 추가해야함
         }
 
         if (collision.CompareTag("RushItem"))
         {
+            Destroy(collision.gameObject);
+            GameManager.Instance.StartSuperRushMethod();
+            GameManager.Instance.Invoke("EndSuperRushMethod", GameManager.Instance.invincibleTime = 1);
 
-            if (collision.CompareTag("RushItem"))
-            {
-                Destroy(collision.gameObject);
-                GameManager.Instance.StartSuperRushMethod();
-                GameManager.Instance.Invoke("EndSuperRushMethod", GameManager.Instance.invincibleTime = 5);
-            }
         }
 
     }

@@ -83,8 +83,8 @@ public class GameManager : MonoBehaviour
         //currentHearts = maxHearts; //현재 체력 초기화
         gameSpeed = 5f;
 
-        Player.ResetState();
-        Player.EnableControls();
+        //Player.ResetState();
+        //Player.EnableControls();
 
         //UIManager 에서 게임화면 상단의 정보창
         //UIManager 화면에 표시되는 점수를 0으로 초기화
@@ -237,6 +237,7 @@ public class GameManager : MonoBehaviour
         }
     }
     public void SetRunSpeed(float speed) => forwardSpeed = speed;
+
     // 여기까지 가지고 옴
 }
 
