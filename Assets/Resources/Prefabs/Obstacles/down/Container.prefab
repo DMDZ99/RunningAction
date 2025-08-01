@@ -101,7 +101,7 @@ MonoBehaviour:
   kind: 0
   distanceToNext: 10
   obstacleYPosition: -5
-  coinYOffset: 5
+  coinYOffset: 4.7
   isHole: 0
 --- !u!61 &1868696391452049294
 BoxCollider2D:

@@ -146,5 +146,5 @@ MonoBehaviour:
   kind: 1
   distanceToNext: 10
   obstacleYPosition: 5
-  coinYOffset: -4
+  coinYOffset: -2.4
   isHole: 0

@@ -102,7 +102,7 @@ MonoBehaviour:
   kind: 0
   distanceToNext: 10
   obstacleYPosition: -10
-  coinYOffset: 6
+  coinYOffset: 4.3
   isHole: 0
 --- !u!95 &6900186279880358205
 Animator:

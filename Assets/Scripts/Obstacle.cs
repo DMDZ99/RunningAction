@@ -64,7 +64,11 @@ public class Obstacle : MonoBehaviour
 
         if (lastKind == ObstacleKind.Slide && data.kind == ObstacleKind.Jump)
         {
-            gap = Mathf.Min(10f, gap); // 슬라이드 뒤에 점프나올때 간격 더 벌리기
+            gap = Mathf.Max(25f, gap); // 슬라이드 뒤에 점프나올때 간격 더 벌리기
+        }
+        else
+        {
+            gap = Mathf.Max(15f, gap);
         }
 
 
