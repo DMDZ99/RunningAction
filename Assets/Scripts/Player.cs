@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
             if (collision.CompareTag("Obstacle"))
             {
                 // HP 깎이는 메소드 추가해야 함
-                HP -= 10;
+                TakeDamager(10);
 
                 SpriteDamageMethod();
                 Invoke("SpriteResetMethod", invincibleTime);
@@ -190,5 +190,14 @@ public class Player : MonoBehaviour
         animator.SetBool("isRush", false);
         isInvincible = false;
         extraSpeed = 0;
+    }
+    private void TakeDamager(int amt)
+    {
+        HP -= amt;
+        if (HP <= 0)
+        {
+            animator.SetTrigger("isDeath");
+            controlsEnabled = true;
+        }
     }
 }
