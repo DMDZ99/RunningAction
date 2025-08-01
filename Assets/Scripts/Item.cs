@@ -23,11 +23,11 @@ public class Item : MonoBehaviour
 {
     public ItemType type;
 
-    // 여기도 주석
-    [SerializeField] private GameObject rushEffectPrefab;
-    [SerializeField] private GameObject shieldEffectPrefab;
-    [SerializeField] private GameObject magnetEffectPrefab;
-    [SerializeField] private GameObject potionEffectPrefab;
+    //// 여기도 주석
+    //[SerializeField] private GameObject rushEffectPrefab;
+    //[SerializeField] private GameObject shieldEffectPrefab;
+    //[SerializeField] private GameObject magnetEffectPrefab;
+    //[SerializeField] private GameObject potionEffectPrefab;
 
     public CoinType coinType;
 
@@ -96,4 +96,9 @@ public class Item : MonoBehaviour
     {
 
     }
+
+    //private void HealPlayer(GameObject player)
+    //{
+
+    //}
 }
