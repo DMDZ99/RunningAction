@@ -1,21 +1,21 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenuU : MonoBehaviour
+public class PauseMenuUI : MonoBehaviour
 {
-    public GameObject pausePanel;   // ÀÏ½ÃÁ¤Áö ÆĞ³Î
-    public GameObject optionPanel;  // ¿É¼Ç ÆĞ³Î
-    public GameObject restart; //Àç½ÃÀÛ ÆĞ³Î
+    public GameObject pausePanel;   // ì¼ì‹œì •ì§€ íŒ¨ë„
+    public GameObject optionPanel;  // ì˜µì…˜ íŒ¨ë„
+    public GameObject restart; //ì¬ì‹œì‘ íŒ¨ë„
 
     private bool isPaused = false;
 
     void Update()
     {
-        // ESC Å°·Î ÀÏ½ÃÁ¤Áö
+        // ESC í‚¤ë¡œ ì¼ì‹œì •ì§€
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
-                PauseGame();
+                PauseGame(); 
         }
     }
 
@@ -23,38 +23,38 @@ public class PauseMenuU : MonoBehaviour
     {
         if (isPaused)
         {
-            // ÀÏ½ÃÁ¤Áö ÇØÁ¦
+            // ì¼ì‹œì •ì§€ í•´ì œ
             Time.timeScale = 1f;
             isPaused = false;
         }
         else
         {
-            // ÀÏ½ÃÁ¤Áö ½ÃÀÛ
+            // ì¼ì‹œì •ì§€ ì‹œì‘
             Time.timeScale = 0f;
             isPaused = true;
         }
     }
 
-    // °ÔÀÓ Àç½ÃÀÛ
+    // ê²Œì„ ì¬ì‹œì‘
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         isPaused = false;
     }
 
-    // ¿É¼Ç ¿­±â
+    // ì˜µì…˜ ì—´ê¸°
     public void OpenOptions()
     {
         optionPanel.SetActive(true);
     }
 
-    // ¿É¼Ç ´İ±â
+    // ì˜µì…˜ ë‹«ê¸°
     public void CloseOptions()
     {
         optionPanel.SetActive(false);
     }
 
-    // °ÔÀÓ ´Ù½Ã ½ÃÀÛ (¾À Àç·Îµå)
+    // ê²Œì„ ë‹¤ì‹œ ì‹œì‘ (ì”¬ ì¬ë¡œë“œ)
     public void RestartGame()
     {
         Time.timeScale = 1f;

@@ -6,12 +6,13 @@ public class Obstacle : MonoBehaviour
 {
     public List<GameObject> obstaclePrefabs;
     public Transform parent;
-    public int initialCount = 5;   // °ÔÀÓ ½ÃÀÛ½Ã »ı¼ºÇÒ Àå¾Ö¹° ¼ö
+    public int initialCount = 5;   // ê²Œì„ ì‹œì‘ì‹œ ìƒì„±í•  ì¥ì• ë¬¼ ìˆ˜
+    public float damageAmount = 20f;
 
     private Vector3 lastPosition;
-    private ObstacleKind lastKind = ObstacleKind.Jump;  // ¸¶Áö¸·Àå¾Ö¹° Á¾·ù = Á¡ÇÁ
+    private ObstacleKind lastKind = ObstacleKind.Jump;  // ë§ˆì§€ë§‰ì¥ì• ë¬¼ ì¢…ë¥˜ = ì í”„
 
-    [SerializeField] private float spawnCooldown = 1f;  // Àå¾Ö¹°»ı¼ºÄğÅ¸ÀÓ
+    [SerializeField] private float spawnCooldown = 1f;  // ì¥ì• ë¬¼ìƒì„±ì¿¨íƒ€ì„
     private float spawnObstacleTimer = 0f;
 
     [SerializeField] private CoinPlacer coinPlacer;     // connect CoinPlacer
@@ -20,9 +21,9 @@ public class Obstacle : MonoBehaviour
 
     private void Start()
     {
-        lastPosition = transform.position;  // ½ÃÀÛÀ§Ä¡
+        lastPosition = transform.position;  // ì‹œì‘ìœ„ì¹˜
 
-        for (int i = 0; i < initialCount; i++)  // ¹İº¹»ı¼º
+        for (int i = 0; i < initialCount; i++)  // ë°˜ë³µìƒì„±
         {
             SpawnObstacle();
         }
@@ -38,32 +39,42 @@ public class Obstacle : MonoBehaviour
         SpawnObstacle();
         spawnObstacleTimer = 0f;
     }
-
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            HealthSystem health = other.GetComponent<HealthSystem>(); //ì¥ì• ë¬¼ ë°ë¯¸ì§€
+            if (health != null)
+            {
+                health.TakeDamage(damageAmount);
+            }
+        }
+    }
 
     private void SpawnObstacle()
     {
-        GameObject prefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Count)];    // ÇÁ¸®ÆÕ¿¡¼­ ·£´ı ¼±ÅÃ
+        GameObject prefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Count)];    // í”„ë¦¬íŒ¹ì—ì„œ ëœë¤ ì„ íƒ
 
         ObstacleData data = prefab.GetComponent<ObstacleData>();
 
-        // ±¸¸ÛÇÔÁ¤
+        // êµ¬ë©í•¨ì •
         if (data.kind == ObstacleKind.Hole)
         {
-            lastPosition += new Vector3(data.distanceToNext, 0f, 0f);   // À§Ä¡¸¸ ºñ¿î´Ù.
+            lastPosition += new Vector3(data.distanceToNext, 0f, 0f);   // ìœ„ì¹˜ë§Œ ë¹„ìš´ë‹¤.
             lastKind = data.kind;
             return;
         }
 
-        float gap = data.distanceToNext;    // °£°İ ÃÊ±âÈ­
+        float gap = data.distanceToNext;    // ê°„ê²© ì´ˆê¸°í™”
 
         if (lastKind == ObstacleKind.Slide && data.kind == ObstacleKind.Slide)
         {
-            gap = Mathf.Max(3f, gap); // 0À¸·ÎÇß´õ´Ï ½½¶óÀÌµåÀå¾Ö¹°ÀÌ °ãÄ§ -> ÃÖ¼Ò °Å¸®
+            gap = Mathf.Max(3f, gap); // 0ìœ¼ë¡œí–ˆë”ë‹ˆ ìŠ¬ë¼ì´ë“œì¥ì• ë¬¼ì´ ê²¹ì¹¨ -> ìµœì†Œ ê±°ë¦¬
         }
 
         if (lastKind == ObstacleKind.Slide && data.kind == ObstacleKind.Jump)
         {
-            gap = Mathf.Max(25f, gap); // ½½¶óÀÌµå µÚ¿¡ Á¡ÇÁ³ª¿Ã¶§ °£°İ ´õ ¹ú¸®±â
+            gap = Mathf.Max(25f, gap); // ìŠ¬ë¼ì´ë“œ ë’¤ì— ì í”„ë‚˜ì˜¬ë•Œ ê°„ê²© ë” ë²Œë¦¬ê¸°
         }
         else
         {
@@ -72,23 +83,23 @@ public class Obstacle : MonoBehaviour
 
 
             Vector3 prefabLocalY = prefab.transform.position;
-        Vector3 position = lastPosition + new Vector3(gap, 0f, 0f); // ÃÖÁ¾À§Ä¡°è»ê
-        position.y = prefabLocalY.y;    // ÇÁ¸®ÆÕÀÇ yÁÂÇ¥ »ç¿ë
+        Vector3 position = lastPosition + new Vector3(gap, 0f, 0f); // ìµœì¢…ìœ„ì¹˜ê³„ì‚°
+        position.y = prefabLocalY.y;    // í”„ë¦¬íŒ¹ì˜ yì¢Œí‘œ ì‚¬ìš©
 
-        GameObject obstacle = Instantiate(prefab, position, Quaternion.identity, parent); // Àå¾Ö¹° »ı¼º
+        GameObject obstacle = Instantiate(prefab, position, Quaternion.identity, parent); // ì¥ì• ë¬¼ ìƒì„±
 
         if (data.kind == ObstacleKind.Jump)
-            coinPlacer.PlaceCoinJump(obstacle.transform.position, data.coinYOffset);      // ÄÚÀÎ Á¾·ùº°·Î Àå¾Ö¹° À§Ä¡¿¡
+            coinPlacer.PlaceCoinJump(obstacle.transform.position, data.coinYOffset);      // ì½”ì¸ ì¢…ë¥˜ë³„ë¡œ ì¥ì• ë¬¼ ìœ„ì¹˜ì—
         else if (data.kind == ObstacleKind.Slide)
             coinPlacer.PlaceCoinSlide(obstacle.transform.position, data.coinYOffset);
 
-            lastPosition = position;    // À§Ä¡, Á¾·ù ÀúÀå
+            lastPosition = position;    // ìœ„ì¹˜, ì¢…ë¥˜ ì €ì¥
         lastKind = data.kind;
 
         ItemSpawner itemSpawner = FindObjectOfType<ItemSpawner>();
         if (itemSpawner != null)
         {
-            itemSpawner.AddObstacle(obstacle.transform); // Àå¾Ö¹° À§Ä¡¸¦ ¾ÆÀÌÅÛ ½ºÆ÷³Ê¿¡ Àü´Ş
+            itemSpawner.AddObstacle(obstacle.transform); // ì¥ì• ë¬¼ ìœ„ì¹˜ë¥¼ ì•„ì´í…œ ìŠ¤í¬ë„ˆì— ì „ë‹¬
         }
     }
 }

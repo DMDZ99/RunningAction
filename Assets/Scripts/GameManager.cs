@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     }
     [Header("Other Managers")]
     //public UIManager UIManager;
+    public PauseMenuUI PauseMenuUI;
     public SoundManager SoundManager;
     //public StageManager StageManager;//스테이지 추가시
     public Player Player;

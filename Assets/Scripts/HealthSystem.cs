@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
 {
-    public Slider healthSlider;  // Ã¼·Â¹Ù UI
+    public Slider healthSlider;  // ì²´ë ¥ë°” UI
     public float maxHealth = 500f;
     public float currentHealth;
-    public float decreaseRate = 10f; // ÃÊ´ç °¨¼Ò·®
+    public float decreaseRate = 10f; // ì´ˆë‹¹ ê°ì†ŒëŸ‰
 
     private bool isDead = false;
 
@@ -22,7 +22,7 @@ public class HealthSystem : MonoBehaviour
     {
         if (isDead) return;
 
-        // Ã¼·Â ÀÚ¿¬ °¨¼Ò
+        // ì²´ë ¥ ìì—° ê°ì†Œ
         currentHealth -= decreaseRate * Time.deltaTime;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
@@ -60,11 +60,11 @@ public class HealthSystem : MonoBehaviour
     {
         isDead = true;
         Debug.Log("Game Over!");
-        // °ÔÀÓ ¿À¹ö Ã³¸® ¿©±â¼­ Ãß°¡ (¾À ÀüÈ¯ µî)
+        // ê²Œì„ ì˜¤ë²„ ì²˜ë¦¬ ì—¬ê¸°ì„œ ì¶”ê°€ (ì”¬ ì „í™˜ ë“±)
     }
 }
-
-public class obstacle : MonoBehaviour
+//ì¥ì• ë¬¼ ìŠ¤í¬ë¦½íŠ¸ ì¤‘ë³µìœ¼ë¡œ ê¸°ì¡´ ì¥ì• ë¬¼ ìŠ¤í¬ë¦½íŠ¸ì— ë³‘í•©
+/*public class obstacle : MonoBehaviour
 {
     public float damageAmount = 20f;
 
@@ -72,11 +72,11 @@ public class obstacle : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            HealthSystem health = other.GetComponent<HealthSystem>(); //Àå¾Ö¹° µ¥¹ÌÁö
+            HealthSystem health = other.GetComponent<HealthSystem>(); //ì¥ì• ë¬¼ ë°ë¯¸ì§€
             if (health != null)
             {
                 health.TakeDamage(damageAmount);
             }
         }
     }
-}
+}*/
