@@ -23,6 +23,7 @@ public class Item : MonoBehaviour
 {
     public ItemType type;
 
+    // 여기도 주석
     [SerializeField] private GameObject rushEffectPrefab;
     [SerializeField] private GameObject shieldEffectPrefab;
     [SerializeField] private GameObject magnetEffectPrefab;
@@ -34,14 +35,21 @@ public class Item : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;        // Ignore if not player
 
+        // 플레이어랑 아이템이 닿으면 게임매니저에 알려주기
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        // 게임매니저에 아이템 타입받는것 필요
+        
         ApplyEffect(other.gameObject);                  // Apply item
         Destroy(gameObject);                            // Destory item after collision
     }
+
+
 
     private void ApplyEffect(GameObject player)
     {
         switch (type)
         {
+            // 여기서 주석처리
             case ItemType.Rush:
                 StartCoroutine(RushEffect(player));
                 break;
@@ -54,12 +62,14 @@ public class Item : MonoBehaviour
             //case ItemType.Potion:
             //    HealPlayer(player);
             //    break;
+            //코인은 주석X
             case ItemType.Coin:
                 GetCoin(player);
                 break;
         }
     }
 
+    // 러시이펙트 올주석
     private System.Collections.IEnumerator RushEffect(GameObject player)    // Coroutine : for duration time
     {
         Rigidbody2D rb2d = player.GetComponent<Rigidbody2D>();
@@ -68,13 +78,16 @@ public class Item : MonoBehaviour
 
         float gameSpeed = rb2d.velocity.x;
 
+
+
         GameObject effect = null;
         if (rushEffectPrefab != null)
         {
             // Instantiate rush effect at player's position
+            Vector3 spawnPosition = player.transform.position + new Vector3(-1f, 0f, 0f);
             effect = Instantiate(rushEffectPrefab, player.transform.position, Quaternion.identity, player.transform);
         }
-
+        
         rb2d.velocity = new Vector2(30, rb2d.velocity.y);   // Temporarily increase speed to 30
 
         // Invincibility: Player ignores obstacle collisions -> Player.cs
@@ -112,13 +125,14 @@ public class Item : MonoBehaviour
     //{
     //    // Heal player (player MaxHp's 30% or 40%?)
     //    currentHearts += (int)(maxHearts * 0.3);
-
+        
 
     //    // Do not exceed max HP 
     //    if (currentHearts >= maxHearts)
     //        currentHearts = maxHearts;
     //}
 
+    //코인은 노주석
     private void GetCoin(GameObject player)
     {
         int score = 0;
