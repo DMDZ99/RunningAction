@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6773595700364442496}
   - component: {fileID: 4916048985001563814}
   - component: {fileID: 3639090450262049104}
+  - component: {fileID: 6040625830007821548}
   m_Layer: 0
   m_Name: SheildItem
   m_TagString: Untagged
@@ -98,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faaf13e399da94842b876aa3100e2837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 0
   rushEffectPrefab: {fileID: 0}
   shieldEffectPrefab: {fileID: 0}
   magnetEffectPrefab: {fileID: 0}
@@ -133,7 +134,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -149,3 +150,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
+--- !u!114 &6040625830007821548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8976107475000257068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19831cb640d6a5d4cad08ec7c8be66b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  destroyDistance: 50
