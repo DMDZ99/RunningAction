@@ -78,13 +78,16 @@ public class Item : MonoBehaviour
 
         float gameSpeed = rb2d.velocity.x;
 
+
+
         GameObject effect = null;
         if (rushEffectPrefab != null)
         {
             // Instantiate rush effect at player's position
+            Vector3 spawnPosition = player.transform.position + new Vector3(-1f, 0f, 0f);
             effect = Instantiate(rushEffectPrefab, player.transform.position, Quaternion.identity, player.transform);
         }
-
+        
         rb2d.velocity = new Vector2(30, rb2d.velocity.y);   // Temporarily increase speed to 30
 
         // Invincibility: Player ignores obstacle collisions -> Player.cs
