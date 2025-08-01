@@ -60,7 +60,9 @@ MonoBehaviour:
   - {fileID: 1532808580645139727, guid: c8f51fa7549868441b46b12b5beadc7e, type: 3}
   parent: {fileID: 0}
   initialCount: 5
+  spawnCooldown: 5
   coinPlacer: {fileID: 6733198114448551762}
+  player: {fileID: 0}
 --- !u!114 &6733198114448551762
 MonoBehaviour:
   m_ObjectHideFlags: 0

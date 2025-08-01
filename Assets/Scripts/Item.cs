@@ -112,7 +112,7 @@ public class Item : MonoBehaviour
     //{
     //    // Heal player (player MaxHp's 30% or 40%?)
     //    currentHearts += (int)(maxHearts * 0.3);
-        
+
 
     //    // Do not exceed max HP 
     //    if (currentHearts >= maxHearts)
