@@ -8,6 +8,8 @@ TagManager:
   - RushItem
   - Item
   - Coin
+  - BackGround
+  - coin
   layers:
   - Default
   - TransparentFX
