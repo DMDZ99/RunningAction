@@ -7,131 +7,52 @@ using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float forwardSpeed;
-    [SerializeField] private float JumpForce;
-    [SerializeField] private float invincibleTime; // 무적 시간
-    [SerializeField] private LayerMask platformLayer;
-    [SerializeField] private Animator animator;
-    [SerializeField] private new Rigidbody2D rigidbody2D;
-    [SerializeField] private Collider2D slideCollider;
-    [SerializeField] private Collider2D runnerCollider;
-    [SerializeField] private SpriteRenderer playerOriginSprite;
-
-    [SerializeField] private int HP = 100; //나중에 삭제해야 한다
-
-    private int jumpCount = 0;
-    private float extraSpeed; // 추가 스피드
-
-    private bool isInvincible; // 무적을 판단하는 변수
-    private bool isGrounded; // 땅에 닿았는지 확인하는 변수
-    private bool isJumping; // 점프를 하고 있는지 확인하는 변수
-
-    private bool controlsEnabled = true;
-
     //public event Action OnHitObstacle;
-    public void SetRunSpeed(float speed) => forwardSpeed = speed;
-    public void EnableControls() => controlsEnabled = true;
-    public void DisableControls() => controlsEnabled = false;
+    public void EnableControls() => GameManager.Instance.controlsEnabled = true;
+    public void DisableControls() => GameManager.Instance.controlsEnabled = false;
     public void ResetState()
     {
-        jumpCount = 0;
-        isJumping = false;
-        animator.SetBool("isJump", false);
-        animator.SetBool("isSlide", false);
-        slideCollider.enabled = false;
-        runnerCollider.enabled = true;
-    }
-    
-    public void Awake()
-    {
-        //animator = GetComponentInChildren<Animator>(); // 자녀에 있는 component를 가지고 올 때 GetComponentInChildren사용
-        //runnerCollider = GetComponent<BoxCollider2D>(); //스크립트가 있는 오브젝트에 코라이더를 받아온다.
-        //playerOriginSprite = GetComponentInChildren<SpriteRenderer>(); // SpriteRenderer의 초기값을 저장한다
-    }
-
-    public void Start()
-    {
-        // animator = GetComponentInChildren<Animator>();
-        //runnerCollider = GetComponent<BoxCollider2D>(); //스크립트가 있는 오브젝트에 코라이더를 받아온다.
+        GameManager.Instance.jumpCount = 0;
+        GameManager.Instance.isJumping = false;
+        GameManager.Instance.animator.SetBool("isJump", false);
+        GameManager.Instance.animator.SetBool("isSlide", false);
+        GameManager.Instance.slideCollider.enabled = false;
+        GameManager.Instance.runnerCollider.enabled = true;
     }
 
     public void Update()
     {
-        if (!controlsEnabled) return;
+        if (!GameManager.Instance.controlsEnabled) return;
         // 앞으로 가는 로직
-        RunnerMovementMethod();
+        GameManager.Instance.RunnerMovementMethod();
 
         //점프 로직
-        RunnerJumpMethod();
+        GameManager.Instance.RunnerJumpMethod();
 
         // 슬라이드 로직
-        RunnerSlideMethod();
+        GameManager.Instance.RunnerSlideMethod();
     }
 
     private void FixedUpdate()//고정으로 0.2초 마다 실행한다.
     {
         // 땅에 닿았는지 확인하는 방법 raycast, 에디터 상에서만 Ray를 그려주는 함수
-        Debug.DrawRay(rigidbody2D.position, Vector3.down, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(rigidbody2D.position, Vector3.down, 2.0f, platformLayer);
+        Debug.DrawRay(GetComponent<Rigidbody2D>().position, Vector3.down, new Color(0, 1, 0));
+        RaycastHit2D rayHit = Physics2D.Raycast(GetComponent<Rigidbody2D>().position, Vector3.down, 2.0f, GameManager.Instance.platformLayer);
 
-        if (rayHit.collider != null && rigidbody2D.velocity.y < 0)
+        if (rayHit.collider != null && GetComponent<Rigidbody2D>().velocity.y < 0)
         {
-            isGrounded = rayHit.distance < 1.05f;
+            GameManager.Instance.isGrounded = rayHit.distance < 1.05f;
         }
         else
         {
-            isGrounded = false;
+            GameManager.Instance.isGrounded = false;
         }
 
-        if (isGrounded && isJumping)
+        if (GameManager.Instance.isGrounded && GameManager.Instance.isJumping)
         {
-            animator.SetBool("isJump", false);
-            isJumping = false;
-            jumpCount = 0;
-        }
-    }
-
-    private void RunnerMovementMethod()
-    {
-        Vector3 baseForwardSpeed = rigidbody2D.velocity;
-        baseForwardSpeed.x = forwardSpeed + extraSpeed; // 추가 스피드로 Rush스피드를 제어할 수 있다.
-
-        rigidbody2D.velocity = baseForwardSpeed;
-    }
-
-    private void RunnerJumpMethod()
-    {
-        
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isGrounded)
-                jumpCount = 1;
-            else
-                jumpCount++;
-
-            if (jumpCount <= 2)
-            {
-                animator.SetBool("isJump", true);
-                rigidbody2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
-                isJumping = true;
-            }
-        }
-    }
-
-    private void RunnerSlideMethod()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            animator.SetBool("isSlide", true);
-            slideCollider.enabled = true; // component를 끄고 키고하는 코드.
-            runnerCollider.enabled = false;
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            animator.SetBool("isSlide", false);
-            slideCollider.enabled = false;
-            runnerCollider.enabled = true;
+            GameManager.Instance.animator.SetBool("isJump", false);
+            GameManager.Instance.isJumping = false;
+            GameManager.Instance.jumpCount = 0;
         }
     }
 
@@ -139,20 +60,20 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // damage 시작점 무적 판단 (무적 시 리턴)
-        if (isInvincible == true)
+        if (GameManager.Instance.isInvincible == true)
             return;
         // 무적이라는 기능은 없다 지금 메소드에서는 isInvincible가 참일 때 충돌하는 코드를 건너 뛰어서 return 하게 만든거다.
 
         if (collision.CompareTag("Obstacle"))
         {
-            Debug.Log(collision.tag);
+            
             if (collision.CompareTag("Obstacle"))
             {
                 // HP 깎이는 메소드 추가해야 함
-                TakeDamage(100);
+                GameManager.Instance.TakeDamage(10);
 
-                SpriteDamageMethod();
-                Invoke("SpriteResetMethod", invincibleTime);
+                GameManager.Instance.SpriteDamageMethod();
+                GameManager.Instance.Invoke("SpriteResetMethod", GameManager.Instance.invincibleTime);
 
                 //animator.SetTrigger("isDamege");
                 // bool은 실행과 끝을 다 체크해야 할때, trigger는 실행만 할 때 (돌아가는 transition을 부착해야한다)
@@ -169,7 +90,7 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("Coin"))
         {
-            Debug.Log(collision.tag); 
+            
             if (collision.CompareTag("Coin"))
             {
                 Destroy(collision.gameObject);
@@ -179,59 +100,14 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("RushItem"))
         {
-            Debug.Log(collision.tag);
+
             if (collision.CompareTag("RushItem"))
             {
                 Destroy(collision.gameObject);
-                StartSuperRushMethod();
-                Invoke("EndSuperRushMethod", invincibleTime = 5);
+                GameManager.Instance.StartSuperRushMethod();
+                GameManager.Instance.Invoke("EndSuperRushMethod", GameManager.Instance.invincibleTime = 5);
             }
         }
 
-    }
-
-    // 장애물 충돌 시 구현된는 애니메이션에 필요한 메소드
-    private void SpriteDamageMethod() // 출동 시 알파 값 조정
-    {
-        animator.SetTrigger("isDamege");
-
-        Color color = playerOriginSprite.color;
-        color.a = 0.5f;
-        playerOriginSprite.color = color;
-        // 무적 true
-        isInvincible = true;
-    }
-    private void SpriteResetMethod() // 출동 후 알파 값 회복
-    {
-        Color color = playerOriginSprite.color;
-        color.a = 1f;
-        playerOriginSprite.color = color;
-        // 무적 false
-        isInvincible = false;
-    }
-    private void StartSuperRushMethod() // rush가 시작되는 메소드
-    {
-        animator.SetBool("isRush", true);
-        isInvincible = true;
-        extraSpeed = 6; 
-    }
-    private void EndSuperRushMethod() // rush가 끝나는 메소드
-    {
-        animator.SetBool("isRush", false);
-        isInvincible = false;
-        extraSpeed = 0;
-    }
-
-    void TakeDamage(int amt) // 이름을 동사로 시작하도록
-    {
-        HP -= amt;
-        if (HP <= 0)
-        {
-            animator.SetTrigger("isDeath");
-            // GameOver 페널
-            // 다리기 멈추기
-            controlsEnabled = false;
-            // ...
-        }
     }
 }

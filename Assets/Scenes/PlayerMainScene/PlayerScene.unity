@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 94774689}
   - component: {fileID: 94774688}
   - component: {fileID: 94774691}
+  - component: {fileID: 94774692}
   m_Layer: 0
   m_Name: Player_Knight
   m_TagString: Player
@@ -363,6 +364,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0bf1ac2f086934ca90e900658873f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &94774692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94774686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cbc5da8a95e11c49922355070ce3925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   forwardSpeed: 0
   JumpForce: 20
   invincibleTime: 2
@@ -375,6 +388,21 @@ MonoBehaviour:
   runnerCollider: {fileID: 94774689}
   playerOriginSprite: {fileID: 530977617}
   HP: 100
+  jumpCount: 0
+  extraSpeed: 0
+  isInvincible: 0
+  isGrounded: 0
+  isJumping: 0
+  controlsEnabled: 1
+  UIManager: {fileID: 0}
+  SoundManager: {fileID: 0}
+  Player: {fileID: 0}
+  isGameOver: 0
+  totalScore: 0
+  maxHearts: 3
+  gameSpeed: 5
+  speedIncreaseRate: 0.1
+  maxSpeed: 10
 --- !u!1 &281570722
 GameObject:
   m_ObjectHideFlags: 0

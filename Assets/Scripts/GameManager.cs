@@ -6,6 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // 여기서
+    [SerializeField] public float forwardSpeed;
+    [SerializeField] public float JumpForce;
+    [SerializeField] public float invincibleTime; // 무적 시간
+    [SerializeField] public LayerMask platformLayer;
+    [SerializeField] public Animator animator;
+    [SerializeField] public new Rigidbody2D rigidbody2D;
+    [SerializeField] public Collider2D slideCollider;
+    [SerializeField] public Collider2D runnerCollider;
+    [SerializeField] public SpriteRenderer playerOriginSprite;
+
+    [SerializeField] public int HP = 100; //나중에 삭제해야 한다
+
+    public int jumpCount = 0;
+    public float extraSpeed; // 추가 스피드
+
+    public bool isInvincible; // 무적을 판단하는 변수
+    public bool isGrounded; // 땅에 닿았는지 확인하는 변수
+    public bool isJumping; // 점프를 하고 있는지 확인하는 변수
+
+    public bool controlsEnabled = true;
+    // 여기까지 가지고옴;
+
     static GameManager gameManager;
 
     public static GameManager Instance
@@ -49,7 +72,7 @@ public class GameManager : MonoBehaviour
         //gameSpeed += speedIncreaseRate * Time.deltaTime;
         //gameSpeed = Mathf.Min(gameSpeed, maxSpeed);
         gameSpeed = Mathf.Min(gameSpeed + speedIncreaseRate * Time.deltaTime, maxSpeed);
-        Player.SetRunSpeed(gameSpeed);
+        SetRunSpeed(gameSpeed);
     }
 
     public void StartGame()
@@ -122,7 +145,98 @@ public class GameManager : MonoBehaviour
         //}
     }
 
+    // 여기서
 
-    
+    /* Player 기본 이동 메소드 */
+    public void RunnerMovementMethod()
+    {
+        Vector3 baseForwardSpeed = rigidbody2D.velocity;
+        baseForwardSpeed.x = forwardSpeed + extraSpeed; // 추가 스피드로 Rush스피드를 제어할 수 있다.
+
+        rigidbody2D.velocity = baseForwardSpeed;
+    }
+
+    public void RunnerJumpMethod()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isGrounded)
+                jumpCount = 1;
+            else
+                jumpCount++;
+
+            if (jumpCount <= 2)
+            {
+                animator.SetBool("isJump", true);
+                rigidbody2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+                isJumping = true;
+            }
+        }
+    }
+
+    public void RunnerSlideMethod()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            animator.SetBool("isSlide", true);
+            slideCollider.enabled = true; // component를 끄고 키고하는 코드.
+            runnerCollider.enabled = false;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            animator.SetBool("isSlide", false);
+            slideCollider.enabled = false;
+            runnerCollider.enabled = true;
+        }
+    }
+
+    /* 장애물 충돌 시 구현된는 애니메이션에 필요한 메소드*/
+
+    public void SpriteDamageMethod() // 출동 시 알파 값 조정
+    {
+        animator.SetTrigger("isDamege");
+
+        Color color = playerOriginSprite.color;
+        color.a = 0.5f;
+        playerOriginSprite.color = color;
+        // 무적 true
+        isInvincible = true;
+    }
+    public void SpriteResetMethod() // 출동 후 알파 값 회복
+    {
+        Color color = playerOriginSprite.color;
+        color.a = 1f;
+        playerOriginSprite.color = color;
+        // 무적 false
+        isInvincible = false;
+    }
+    public void StartSuperRushMethod() // rush가 시작되는 메소드
+    {
+        animator.SetBool("isRush", true);
+        isInvincible = true;
+        extraSpeed = 6;
+    }
+    public void EndSuperRushMethod() // rush가 끝나는 메소드
+    {
+        animator.SetBool("isRush", false);
+        isInvincible = false;
+        extraSpeed = 0;
+    }
+    public void TakeDamage(int amt) // 이름을 동사로 시작하도록
+    {
+        HP -= amt;
+        if (HP <= 0)
+        {
+            animator.SetTrigger("isDeath");
+            // GameOver 페널
+            // 다리기 멈추기
+            controlsEnabled = false;
+            // ...
+        }
+    }
+    public void SetRunSpeed(float speed) => forwardSpeed = speed;
+    // 여기까지 가지고 옴
 }
 
