@@ -11,7 +11,12 @@ public class Obstacle : MonoBehaviour
     private Vector3 lastPosition;
     private ObstacleKind lastKind = ObstacleKind.Jump;  // 마지막장애물 종류 = 점프
 
+    [SerializeField] private float spawnCooldown = 1f;  // 장애물생성쿨타임
+    private float spawnObstacleTimer = 0f;
+
     [SerializeField] private CoinPlacer coinPlacer;     // connect CoinPlacer
+
+    [SerializeField] private Transform player;
 
     private void Start()
     {
@@ -22,6 +27,18 @@ public class Obstacle : MonoBehaviour
             SpawnObstacle();
         }
     }
+
+    private void Update()
+    {
+        spawnObstacleTimer += Time.deltaTime;
+
+        if (spawnObstacleTimer < spawnCooldown)
+            return;
+
+        SpawnObstacle();
+        spawnObstacleTimer = 0f;
+    }
+
 
     private void SpawnObstacle()
     {
@@ -41,10 +58,20 @@ public class Obstacle : MonoBehaviour
 
         if (lastKind == ObstacleKind.Slide && data.kind == ObstacleKind.Slide)
         {
-            gap = Mathf.Max(1f, gap); // 0으로했더니 슬라이드장애물이 겹침 -> 최소 거리
+            gap = Mathf.Max(3f, gap); // 0으로했더니 슬라이드장애물이 겹침 -> 최소 거리
         }
 
-        Vector3 prefabLocalY = prefab.transform.position;
+        if (lastKind == ObstacleKind.Slide && data.kind == ObstacleKind.Jump)
+        {
+            gap = Mathf.Max(25f, gap); // 슬라이드 뒤에 점프나올때 간격 더 벌리기
+        }
+        else
+        {
+            gap = Mathf.Max(15f, gap);
+        }
+
+
+            Vector3 prefabLocalY = prefab.transform.position;
         Vector3 position = lastPosition + new Vector3(gap, 0f, 0f); // 최종위치계산
         position.y = prefabLocalY.y;    // 프리팹의 y좌표 사용
 

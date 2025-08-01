@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 235566140577077870}
   - component: {fileID: 6006571108055065934}
   - component: {fileID: 1868696391452049294}
+  - component: {fileID: 895332963129719817}
   m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
@@ -101,7 +102,7 @@ MonoBehaviour:
   kind: 0
   distanceToNext: 10
   obstacleYPosition: -5
-  coinYOffset: 5
+  coinYOffset: 4.7
   isHole: 0
 --- !u!61 &1868696391452049294
 BoxCollider2D:
@@ -132,7 +133,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -148,3 +149,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.09, y: 0.47}
   m_EdgeRadius: 0
+--- !u!114 &895332963129719817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855421613988607299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19831cb640d6a5d4cad08ec7c8be66b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  destroyDistance: 50
