@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 1505575975, guid: 862937a797a298248afce6d07cfba3eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   shieldEffectPrefab: {fileID: 0}
   magnetEffectPrefab: {fileID: 0}
   potionEffectPrefab: {fileID: 0}
-  coinType: 1
+  coinType: 0
 --- !u!61 &4413858015199144620
 BoxCollider2D:
   m_ObjectHideFlags: 0
