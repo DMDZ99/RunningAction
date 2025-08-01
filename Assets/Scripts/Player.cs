@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         slideCollider.enabled = false;
         runnerCollider.enabled = true;
     }
-    // Start is called before the first frame update
+    
     public void Awake()
     {
         //animator = GetComponentInChildren<Animator>(); // 자녀에 있는 component를 가지고 올 때 GetComponentInChildren사용
@@ -54,7 +54,6 @@ public class Player : MonoBehaviour
         //runnerCollider = GetComponent<BoxCollider2D>(); //스크립트가 있는 오브젝트에 코라이더를 받아온다.
     }
 
-    // Update is called once per frame
     public void Update()
     {
         if (!controlsEnabled) return;
@@ -149,7 +148,7 @@ public class Player : MonoBehaviour
             if (collision.CompareTag("Obstacle"))
             {
                 // HP 깎이는 메소드 추가해야 함
-                HP -= 10;
+                TakeDamage(100);
 
                 SpriteDamageMethod();
                 Invoke("SpriteResetMethod", invincibleTime);
@@ -220,5 +219,18 @@ public class Player : MonoBehaviour
         animator.SetBool("isRush", false);
         isInvincible = false;
         extraSpeed = 0;
+    }
+
+    void TakeDamage(int amt) // 이름을 동사로 시작하도록
+    {
+        HP -= amt;
+        if (HP <= 0)
+        {
+            animator.SetTrigger("isDeath");
+            // GameOver 페널
+            // 다리기 멈추기
+            controlsEnabled = false;
+            // ...
+        }
     }
 }
