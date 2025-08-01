@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 22714584}
   m_Layer: 0
   m_Name: Item
-  m_TagString: Item
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 94774688}
-  forwardSpeed: 4
+  forwardSpeed: 0
   JumpForce: 20
   platformLayer:
     serializedVersion: 2
@@ -374,6 +374,7 @@ MonoBehaviour:
   animator: {fileID: 530977616}
   runnerCollider: {fileID: 94774689}
   playerOriginSprite: {fileID: 530977617}
+  HP: 100
 --- !u!1 &281570722
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,7 +839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!58 &1898649949
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -958,7 +959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &1936093463
 CircleCollider2D:
   m_ObjectHideFlags: 0
