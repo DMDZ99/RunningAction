@@ -23,7 +23,7 @@ public class Item : MonoBehaviour
 {
     public ItemType type;
 
-    //// 여기도 주석
+    //// Effect
     //[SerializeField] private GameObject rushEffectPrefab;
     //[SerializeField] private GameObject shieldEffectPrefab;
     //[SerializeField] private GameObject magnetEffectPrefab;
@@ -31,16 +31,55 @@ public class Item : MonoBehaviour
 
     public CoinType coinType;
 
+    private bool isMagnetActive = false;
+    private float magnetTimer = 0f;
+    private Transform playerTransform;
+
+    [SerializeField] private float magnetDuration = 5f;
+    [SerializeField] private float magnetSpeed = 10f;
+    [SerializeField] private float magnetRadius = 5f;   // 자석 범위
+
+    private void Update()
+    {
+        if (isMagnetActive)
+        {
+            magnetTimer -= Time.deltaTime;
+            if(magnetTimer <= 0f)
+            {
+                isMagnetActive = false;
+                return;
+            }
+
+            Collider2D[] coins = Physics2D.OverlapCircleAll(playerTransform.position, magnetRadius);    // 자석 범위내에 모든 Collider2D 탐색
+
+            foreach (var coin in coins)
+            {
+                if (coin.CompareTag("Coin"))    // 탐색한게 코인이면
+                {
+                    Vector3 direction = (playerTransform.position - coin.transform.position).normalized;    // 방향 = 플레이어위치 - 코인 위치
+                    coin.transform.position += direction * magnetSpeed * Time.deltaTime;                    // 코인 위치를 방향만큼 자석속도로 가게함 시간동안
+                }
+            }
+
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;        // Ignore if not player
 
-        // 플레이어랑 아이템이 닿으면 게임매니저에 알려주기
-        GameManager gameManager = FindObjectOfType<GameManager>();
-        // 게임매니저에 아이템 타입받는것 필요
-        
-        ApplyEffect(other.gameObject);                  // Apply item
-        Destroy(gameObject);                            // Destory item after collision
+        ApplyEffect(other.gameObject);                  // 아이템 효과 먼저 적용
+
+        if (type == ItemType.Magnet)
+        {
+            GetComponent<SpriteRenderer>().enabled = false;     // 자석아이템일시 이미지를 비활성화
+            GetComponent<Collider2D>().enabled = false;         // 충돌도 비활성화
+        }
+
+        else
+        {
+            Destroy(gameObject);                            // Destory item after collision
+        }
     }
 
 
@@ -49,20 +88,19 @@ public class Item : MonoBehaviour
     {
         switch (type)
         {
-            // 여기서 주석처리
-            case ItemType.Rush:
-                RushPlayer(player);
-                break;
+            // 아이템 종류
+            //case ItemType.Rush:
+            //    RushPlayer(player);
+            //    break;
             //case ItemType.Shield:
             //    ShieldPlayer(player);
             //    break;
-            //case ItemType.Magnet:
-            //    MagnetPlayer(player);
-            //    break;
-            //case ItemType.Potion:
-            //    HealPlayer(player);
-            //    break;
-            //코인은 주석X
+            case ItemType.Magnet:
+                MagnetPlayer(player);
+                break;
+            case ItemType.Potion:
+                HealPlayer(player);
+                break;
             case ItemType.Coin:
                 GetCoin(player);
                 break;
@@ -92,13 +130,37 @@ public class Item : MonoBehaviour
         Debug.Log($"코인 : {coinType} + {score}");
     }
 
-    private void RushPlayer(GameObject player)
-    {
-
-    }
-
-    //private void HealPlayer(GameObject player)
+    //private void RushPlayer(GameObject player)
     //{
 
+    //}
+
+    private void HealPlayer(GameObject player)
+    {
+        // Heal player (player MaxHp's 30% or 40%?)
+        HealthSystem healthSystem = player.GetComponent<HealthSystem>();
+        if (healthSystem != null)
+        {
+            float healAmount = healthSystem.maxHealth * 0.3f;
+            healthSystem.currentHealth += healAmount;
+        }
+
+        // Do not exceed max HP 
+        if (healthSystem.currentHealth >= healthSystem.maxHealth)
+            healthSystem.currentHealth = healthSystem.maxHealth;
+    }
+
+    private void MagnetPlayer(GameObject player)
+    {
+        isMagnetActive = true;
+        magnetTimer = magnetDuration;           // 타이머초기화
+        playerTransform = player.transform;     // 플레이어 위치 저장
+    }
+
+    //private void ShieldPlayer(GameObject player)
+    //{
+    //    // Apply shield effect until collision
+    //    // 1 second of invincibility after shield breaks
+    //    // Stack or not Stack?
     //}
 }

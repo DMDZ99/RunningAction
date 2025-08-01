@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.89, y: -2.04, z: -0.22421399}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 2.6, y: 2.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: 22c2bb14dff61144a8135f4985a7562a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f2a1932565af7324e81c34da974e1253, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,12 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faaf13e399da94842b876aa3100e2837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  rushEffectPrefab: {fileID: 0}
-  shieldEffectPrefab: {fileID: 0}
-  magnetEffectPrefab: {fileID: 0}
-  potionEffectPrefab: {fileID: 0}
+  type: 3
   coinType: 0
+  magnetDuration: 5
+  magnetSpeed: 10
+  magnetRadius: 5
 --- !u!61 &4932067662993434074
 BoxCollider2D:
   m_ObjectHideFlags: 0

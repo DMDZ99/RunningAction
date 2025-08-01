@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7900964933986005564}
   m_Layer: 0
   m_Name: RushItem
-  m_TagString: Untagged
+  m_TagString: RushItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.64, y: -0.34, z: -0.22421399}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 2.6, y: 2.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: f3ff7cc58c3c03242b36391fadd488ed, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c353dd29f7600c84bb0bd57fd112278b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,10 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  rushEffectPrefab: {fileID: 277319403502362525, guid: 8ab94f7f05cb43641a2e2dbd084c7fa3, type: 3}
-  shieldEffectPrefab: {fileID: 0}
-  magnetEffectPrefab: {fileID: 0}
-  potionEffectPrefab: {fileID: 0}
   coinType: 0
 --- !u!61 &8453925505006717734
 BoxCollider2D:
