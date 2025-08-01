@@ -11,13 +11,12 @@ public class Obstacle : MonoBehaviour
     private Vector3 lastPosition;
     private ObstacleKind lastKind = ObstacleKind.Jump;  // 마지막장애물 종류 = 점프
 
-    [SerializeField] private float spawnCooldown = 0.5f;  // 장애물생성쿨타임
+    [SerializeField] private float spawnCooldown = 1f;  // 장애물생성쿨타임
     private float spawnObstacleTimer = 0f;
 
     [SerializeField] private CoinPlacer coinPlacer;     // connect CoinPlacer
 
     [SerializeField] private Transform player;
-    //[SerializeField] private float destroyDistance = 30f;   // 지나가면 파괴되게
 
     private void Start()
     {

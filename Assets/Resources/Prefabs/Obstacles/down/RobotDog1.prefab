@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7696524482239839583}
   - component: {fileID: 4448325501082312652}
   - component: {fileID: 8734062774250289506}
+  - component: {fileID: -4509545693771560886}
   m_Layer: 0
   m_Name: RobotDog1
   m_TagString: Untagged
@@ -170,3 +171,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-4509545693771560886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5010295128463574375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19831cb640d6a5d4cad08ec7c8be66b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  destroyDistance: 50

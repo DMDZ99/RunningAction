@@ -1061,7 +1061,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2142992405
+--- !u!1001 &2146780395
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1113,9 +1113,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 3392344530262238125, guid: ff59e7c82be20c54abfc6822e3dd6dad, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
+    - target: {fileID: 3644555465576106582, guid: ff59e7c82be20c54abfc6822e3dd6dad, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 94774690}
+    - target: {fileID: 7661927747608856133, guid: ff59e7c82be20c54abfc6822e3dd6dad, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 94774690}
+    - target: {fileID: 7661927747608856133, guid: ff59e7c82be20c54abfc6822e3dd6dad, type: 3}
+      propertyPath: destroyDistance
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1132,4 +1140,4 @@ SceneRoots:
   - {fileID: 1898649951}
   - {fileID: 1936093465}
   - {fileID: 22714586}
-  - {fileID: 2142992405}
+  - {fileID: 2146780395}

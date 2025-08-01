@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5329742989449223392}
   - component: {fileID: 204220413006101972}
   - component: {fileID: 4932067662993434074}
+  - component: {fileID: 1798473651873606021}
   m_Layer: 0
   m_Name: Potion
   m_TagString: Untagged
@@ -98,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faaf13e399da94842b876aa3100e2837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  type: 0
   rushEffectPrefab: {fileID: 0}
   shieldEffectPrefab: {fileID: 0}
   magnetEffectPrefab: {fileID: 0}
@@ -149,3 +150,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
+--- !u!114 &1798473651873606021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675846736954408763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19831cb640d6a5d4cad08ec7c8be66b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  destroyDistance: 50
