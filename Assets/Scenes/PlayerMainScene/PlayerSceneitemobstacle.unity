@@ -672,8 +672,12 @@ PrefabInstance:
       value: Obstacle (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3644555465576106582, guid: ff59e7c82be20c54abfc6822e3dd6dad, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 94774690}
+    - target: {fileID: 3644555465576106582, guid: ff59e7c82be20c54abfc6822e3dd6dad, type: 3}
       propertyPath: spawnCooldown
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
