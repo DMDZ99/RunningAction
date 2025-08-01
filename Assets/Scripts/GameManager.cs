@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
         get; private set;
     }
     [Header("Other Managers")]
-    public UIManager UIManager;
+    //public UIManager UIManager;
     public SoundManager SoundManager;
     //public StageManager StageManager;//스테이지 추가시
     public Player Player;
