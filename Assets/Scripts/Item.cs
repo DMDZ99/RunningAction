@@ -51,13 +51,13 @@ public class Item : MonoBehaviour
         {
             // 여기서 주석처리
             case ItemType.Rush:
-                StartCoroutine(RushEffect(player));
+                RushPlayer(player);
                 break;
             //case ItemType.Shield:
-            //    StartCoroutine(ShieldEffect(player));
+            //    ShieldPlayer(player);
             //    break;
             //case ItemType.Magnet:
-            //    StartCoroutine(MagnetEffect(player));
+            //    MagnetPlayer(player);
             //    break;
             //case ItemType.Potion:
             //    HealPlayer(player);
@@ -69,70 +69,6 @@ public class Item : MonoBehaviour
         }
     }
 
-    // 러시이펙트 올주석
-    private System.Collections.IEnumerator RushEffect(GameObject player)    // Coroutine : for duration time
-    {
-        Rigidbody2D rb2d = player.GetComponent<Rigidbody2D>();
-        if (rb2d == null)
-            yield break;
-
-        float gameSpeed = rb2d.velocity.x;
-
-
-
-        GameObject effect = null;
-        if (rushEffectPrefab != null)
-        {
-            // Instantiate rush effect at player's position
-            Vector3 spawnPosition = player.transform.position + new Vector3(-1f, 0f, 0f);
-            effect = Instantiate(rushEffectPrefab, player.transform.position, Quaternion.identity, player.transform);
-        }
-        
-        rb2d.velocity = new Vector2(30, rb2d.velocity.y);   // Temporarily increase speed to 30
-
-        // Invincibility: Player ignores obstacle collisions -> Player.cs
-
-        // Invincible during rush (3 seconds)
-        yield return new WaitForSeconds(3f);
-
-        // End rush: revert to original speed
-        rb2d.velocity = new Vector2(gameSpeed, rb2d.velocity.y);
-
-        // 1 second of invincibility after rush ends
-        yield return new WaitForSeconds(1f);
-
-        //Remove invincibility
-
-        // Destroy effect
-        if (effect != null)
-            Destroy(effect);
-
-    }
-
-    //private System.Collections.IEnumerator ShieldEffect(GameObject player)
-    //{
-    //    // Apply shield effect until collision
-    //    // 1 second of invincibility after shield breaks
-    //    // Stack or not Stack?
-    //}
-
-    //private System.Collections.IEnumerator MagnetEffect(GameObject player)
-    //{
-    //    // Apply magnet effect for 5 seconds
-    //}
-
-    //private void HealPlayer(GameObject player)
-    //{
-    //    // Heal player (player MaxHp's 30% or 40%?)
-    //    currentHearts += (int)(maxHearts * 0.3);
-        
-
-    //    // Do not exceed max HP 
-    //    if (currentHearts >= maxHearts)
-    //        currentHearts = maxHearts;
-    //}
-
-    //코인은 노주석
     private void GetCoin(GameObject player)
     {
         int score = 0;
@@ -154,5 +90,10 @@ public class Item : MonoBehaviour
         }
 
         Debug.Log($"코인 : {coinType} + {score}");
+    }
+
+    private void RushPlayer(GameObject player)
+    {
+
     }
 }
