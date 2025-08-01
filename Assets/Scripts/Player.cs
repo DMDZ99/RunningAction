@@ -7,17 +7,20 @@ using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private new Rigidbody2D rigidbody2D;
     [SerializeField] private float forwardSpeed;
     [SerializeField] private float JumpForce;
-    [SerializeField] private LayerMask platformLayer;
-    [SerializeField] private Collider2D slideCollider;
     [SerializeField] private float invincibleTime; // 무적 시간
+    [SerializeField] private LayerMask platformLayer;
     [SerializeField] private Animator animator;
+    [SerializeField] private new Rigidbody2D rigidbody2D;
+    [SerializeField] private Collider2D slideCollider;
     [SerializeField] private Collider2D runnerCollider;
     [SerializeField] private SpriteRenderer playerOriginSprite;
 
+    [SerializeField] private int HP = 100; //나중에 삭제해야 한다
+
     private int jumpCount = 0;
+    private float extraSpeed; // 추가 스피드
 
     private bool isInvincible; // 무적을 판단하는 변수
     private bool isGrounded; // 땅에 닿았는지 확인하는 변수
@@ -47,7 +50,7 @@ public class Player : MonoBehaviour
 
     public void Start()
     {
-       // animator = GetComponentInChildren<Animator>();
+        // animator = GetComponentInChildren<Animator>();
         //runnerCollider = GetComponent<BoxCollider2D>(); //스크립트가 있는 오브젝트에 코라이더를 받아온다.
     }
 
@@ -65,7 +68,6 @@ public class Player : MonoBehaviour
         RunnerSlideMethod();
     }
 
-    
     private void FixedUpdate()//고정으로 0.2초 마다 실행한다.
     {
         // 땅에 닿았는지 확인하는 방법 raycast, 에디터 상에서만 Ray를 그려주는 함수
@@ -89,12 +91,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    private float extraSpeed;
-
     private void RunnerMovementMethod()
     {
         Vector3 baseForwardSpeed = rigidbody2D.velocity;
-        baseForwardSpeed.x = forwardSpeed + extraSpeed;
+        baseForwardSpeed.x = forwardSpeed + extraSpeed; // 추가 스피드로 Rush스피드를 제어할 수 있다.
 
         rigidbody2D.velocity = baseForwardSpeed;
     }
@@ -148,6 +148,9 @@ public class Player : MonoBehaviour
             Debug.Log(collision.tag);
             if (collision.CompareTag("Obstacle"))
             {
+                // HP 깎이는 메소드 추가해야 함
+                HP -= 10;
+
                 SpriteDamageMethod();
                 Invoke("SpriteResetMethod", invincibleTime);
 
@@ -166,10 +169,11 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("Coin"))
         {
-            Debug.Log(collision.tag);
+            Debug.Log(collision.tag); 
             if (collision.CompareTag("Coin"))
             {
                 Destroy(collision.gameObject);
+                // 점수가 늘어나는 메소드 추가해야함
             }
         }
 
@@ -180,11 +184,12 @@ public class Player : MonoBehaviour
             {
                 Destroy(collision.gameObject);
                 StartSuperRushMethod();
-                Invoke("EndSuperRushMethod", invincibleTime = 10);
+                Invoke("EndSuperRushMethod", invincibleTime = 5);
             }
         }
 
     }
+
     // 장애물 충돌 시 구현된는 애니메이션에 필요한 메소드
     private void SpriteDamageMethod() // 출동 시 알파 값 조정
     {
@@ -204,13 +209,13 @@ public class Player : MonoBehaviour
         // 무적 false
         isInvincible = false;
     }
-    private void StartSuperRushMethod() // 
+    private void StartSuperRushMethod() // rush가 시작되는 메소드
     {
         animator.SetBool("isRush", true);
         isInvincible = true;
-        extraSpeed = 10;
+        extraSpeed = 6; 
     }
-    private void EndSuperRushMethod() // 
+    private void EndSuperRushMethod() // rush가 끝나는 메소드
     {
         animator.SetBool("isRush", false);
         isInvincible = false;
