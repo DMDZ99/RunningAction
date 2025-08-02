@@ -81,4 +81,4 @@ MonoBehaviour:
   - {fileID: 7053046318404190243, guid: 3ef36e63f7cd4954ab3e4a4f682d699a, type: 3}
   coinParent: {fileID: 0}
   coinSpacing: 1
-  coinCount: 1
+  coinCount: 3

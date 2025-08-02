@@ -67,7 +67,7 @@ public class Obstacle : MonoBehaviour
         }
         else
         {
-            gap = Mathf.Max(15f, gap);
+            gap = Mathf.Max(10f, gap);
         }
 
 
