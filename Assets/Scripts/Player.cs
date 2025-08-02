@@ -12,12 +12,14 @@ public class Player : MonoBehaviour
     [SerializeField] private Collider2D runnerCollider;
     [SerializeField] private SpriteRenderer playerOriginSprite;
 
+    [SerializeField] private Collider2D itemTriggerCollider;    // 아이템 감지용 트리거콜라이더
+
     [SerializeField] private int HP = 100; //나중에 삭제해야 한다
 
     private int jumpCount = 0;
     private float extraSpeed; // 추가 스피드
 
-    private bool isInvincible; // 무적을 판단하는 변수
+    public bool isInvincible; // 무적을 판단하는 변수
     private bool isGrounded; // 땅에 닿았는지 확인하는 변수
     private bool isJumping; // 점프를 하고 있는지 확인하는 변수
 
@@ -34,6 +36,8 @@ public class Player : MonoBehaviour
         animator.SetBool("isSlide", false);
         slideCollider.enabled = false;
         runnerCollider.enabled = true;
+
+        itemTriggerCollider.enabled = true; // 아이템 트리거 콜라이더 항상 활성화
     }
 
     // Update is called once per frame
@@ -107,6 +111,8 @@ public class Player : MonoBehaviour
             animator.SetBool("isSlide", true);
             slideCollider.enabled = true; // component를 끄고 키고하는 코드.
             runnerCollider.enabled = false;
+
+            itemTriggerCollider.enabled = true; // 슬라이드때도 아이템트리거활성화
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
@@ -114,6 +120,8 @@ public class Player : MonoBehaviour
             animator.SetBool("isSlide", false);
             slideCollider.enabled = false;
             runnerCollider.enabled = true;
+
+            itemTriggerCollider.enabled = true;
         }
     }
 
@@ -129,6 +137,11 @@ public class Player : MonoBehaviour
             Debug.Log(collision.tag);
             if (collision.CompareTag("Obstacle"))
             {
+                Item shieldItem = FindObjectOfType<Item>(); // 실드 아이템활성화 후 충돌시 아이템에서 로직 가져옴
+                if (shieldItem != null)
+                {
+                    shieldItem.OnPlayerHitObstacle();
+                }
                 // HP 깎이는 메소드 추가해야 함
                 TakeDamager(10);
 
