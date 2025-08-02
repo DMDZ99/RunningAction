@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -137,6 +138,25 @@ public class Player : MonoBehaviour
             }
         }
 
+        // Shield 로직:
+        // 1. 아이템을 먹으면 활성하고 기본 무적 시간이 있다 무적 시간이 끝나면 정상으로 돌아온다.
+        // 2. 활성 도중 장애물과 충돌하면 바로 무적 타임이 끝난다. (별도에 애니메이션이 필요하다)
+        if (collision.CompareTag("ShieldItem"))
+        {
+            Debug.Log(collision.tag);
+            if (collision.CompareTag("ShieldItem"))
+            {
+                Destroy(collision.gameObject);
+                StartShield();
+                if (collision.CompareTag("Obstacle"))
+                {
+                    ActiveShield();
+                    InactiveShield();
+                }
+                Invoke("EndShield", invincibleTime = 5);
+            }
+        }
+
         if (collision.CompareTag("Coin"))
         {
             Debug.Log(collision.tag);
@@ -191,6 +211,27 @@ public class Player : MonoBehaviour
         isInvincible = false;
         extraSpeed = 0;
     }
+
+    private void StartShield()
+    {
+        animator.SetBool("isShield", true); // 실드가 있는 상태로 튀기 (기본 무적 시간 보유)
+        isInvincible = true;
+    }
+    private void EndShield()
+    {
+        animator.SetBool("isShield", false);
+        isInvincible = false;
+    }
+    private void ActiveShield()
+    {
+        animator.SetBool("isShieldActive", true);
+    }
+    private void InactiveShield()
+    {
+        animator.SetBool("isShieldActive", false); // 방어 한번하고 무적 끝기
+        isInvincible = false;
+    }
+
     private void TakeDamager(int amt)
     {
         HP -= amt;
