@@ -106,16 +106,6 @@ public class Item : MonoBehaviour
         {
             Destroy(gameObject);                            // Destory item after collision
         }
-
-        //if (other.CompareTag("Obstacle"))
-        //{
-        //    Item shieldItem = FindObjectOfType<Item>(); // 실드 아이템활성화 후 충돌시 아이템에서 로직 가져옴
-        //    if (shieldItem != null)
-        //    {
-        //        shieldItem.OnPlayerHitObstacle();
-        //    }
-        //}
-
     }
 
 
@@ -128,9 +118,9 @@ public class Item : MonoBehaviour
             //case ItemType.Rush:
             //    RushPlayer(player);
             //    break;
-            //case ItemType.Shield:
-            //    ShieldPlayer(player);
-            //    break;
+            case ItemType.Shield:
+                ShieldPlayer(player);
+                break;
             case ItemType.Magnet:
                 MagnetPlayer(player);
                 break;
@@ -193,27 +183,27 @@ public class Item : MonoBehaviour
         playerTransform = player.transform;     // 플레이어 위치 저장
     }
 
-    //private void ShieldPlayer(GameObject player)
-    //{
-    //    this.player = player.GetComponent<Player>();
-    //    isShieldActive = true;
-    //    shieldTimer = shieldDuration;
+    private void ShieldPlayer(GameObject player)
+    {
+        this.player = player.GetComponent<Player>();
+        isShieldActive = true;
+        shieldTimer = shieldDuration;
 
-    //    if (this.player != null)
-    //        this.player.isInvincible = false;
+        if (this.player != null)
+            this.player.isInvincible = false;
 
-    //}
+    }
 
-    //public void OnPlayerHitObstacle()       // 플레이어가 충돌시 실드 꺼지고 무적 켜지는 로직
-    //{
-    //    if (!isShieldActive) return;
+    public void OnPlayerHitObstacle()       // 플레이어가 충돌시 실드 꺼지고 무적 켜지는 로직
+    {
+        if (!isShieldActive) return;
 
-    //    isShieldActive = false;    // 쉴드 해제
+        isShieldActive = false;    // 쉴드 해제
 
-    //    if (player != null)
-    //    {
-    //        player.isInvincible = true;                    // 무적 켜기
-    //        invincibleTimer = shieldInvincibleDuration;   // 무적 지속시간 타이머 초기화
-    //    }
-    //}
+        if (player != null)
+        {
+            player.isInvincible = true;                    // 무적 켜기
+            invincibleTimer = shieldInvincibleDuration;   // 무적 지속시간 타이머 초기화
+        }
+    }
 }

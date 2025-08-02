@@ -137,6 +137,11 @@ public class Player : MonoBehaviour
             Debug.Log(collision.tag);
             if (collision.CompareTag("Obstacle"))
             {
+                Item shieldItem = FindObjectOfType<Item>(); // 실드 아이템활성화 후 충돌시 아이템에서 로직 가져옴
+                if (shieldItem != null)
+                {
+                    shieldItem.OnPlayerHitObstacle();
+                }
                 // HP 깎이는 메소드 추가해야 함
                 TakeDamager(10);
 

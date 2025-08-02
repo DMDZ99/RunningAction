@@ -47,6 +47,7 @@ MonoBehaviour:
   itemPrefabs:
   - {fileID: 4950246575035407669, guid: 679ee00a7edbd5c4f97decc096ba9e9d, type: 3}
   - {fileID: 7983086484587485579, guid: 75630371d2ed6a74c94899d1ebd9490c, type: 3}
+  - {fileID: 8976107475000257068, guid: 2df84bab81cb2ba41b6f3a38ff630056, type: 3}
   - {fileID: 675846736954408763, guid: 4c09a01c6b600f64e89c7b2dd8763b15, type: 3}
   itemSpawnTime: 50
   itemDistance: 15
