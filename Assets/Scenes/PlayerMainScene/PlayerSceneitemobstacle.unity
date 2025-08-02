@@ -435,7 +435,7 @@ MonoBehaviour:
   slideCollider: {fileID: 281570724}
   runnerCollider: {fileID: 94774689}
   playerOriginSprite: {fileID: 530977617}
-  itemTriggerCollider: {fileID: 281570724}
+  itemTriggerCollider: {fileID: 0}
   HP: 100
   isInvincible: 0
 --- !u!1 &156281365
