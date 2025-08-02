@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float forwardSpeed;
     [SerializeField] private float JumpForce;
-    [SerializeField] private float invincibleTime; // 무적 시간
+    //[SerializeField] private float invincibleTime; // 무적 시간
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] private Animator animator;
     [SerializeField] private new Rigidbody2D rigidbody2D;
@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private int jumpCount = 0;
     private float extraSpeed; // 추가 스피드
 
+    private bool isShielded; // 실드가 작동하고 있는지 확인하는 변수
     private bool isInvincible; // 무적을 판단하는 변수
     private bool isGrounded; // 땅에 닿았는지 확인하는 변수
     private bool isJumping; // 점프를 하고 있는지 확인하는 변수
@@ -127,15 +128,20 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("Obstacle"))
         {
-            Debug.Log(collision.tag);
-            if (collision.CompareTag("Obstacle"))
+            if (isShielded)
             {
-                // HP 깎이는 메소드 추가해야 함
-                TakeDamager(10);
-
-                SpriteDamageMethod();
-                Invoke("SpriteResetMethod", invincibleTime);
+                ActiveShield();
+                Invoke("InactiveShield", 0.5f);
+                //InactiveShield();
+                CancelInvoke("EndShield");
+                return;
             }
+            
+            // HP 깎이는 메소드 추가해야 함
+            TakeDamager(10);
+
+            SpriteDamageMethod();
+            Invoke("SpriteResetMethod", 2);
         }
 
         // Shield 로직:
@@ -144,38 +150,26 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("ShieldItem"))
         {
             Debug.Log(collision.tag);
-            if (collision.CompareTag("ShieldItem"))
-            {
-                Destroy(collision.gameObject);
-                StartShield();
-                if (collision.CompareTag("Obstacle"))
-                {
-                    ActiveShield();
-                    InactiveShield();
-                }
-                Invoke("EndShield", invincibleTime = 5);
-            }
+            Destroy(collision.gameObject);
+            StartShield();
+            Invoke("EndShield", 5);            
         }
 
         if (collision.CompareTag("Coin"))
         {
             Debug.Log(collision.tag);
-            if (collision.CompareTag("Coin"))
-            {
-                Destroy(collision.gameObject);
-                // 점수가 늘어나는 메소드 추가해야함
-            }
+
+            Destroy(collision.gameObject);
+            // 점수가 늘어나는 메소드 추가해야함
         }
 
-        if (collision.CompareTag("RushItem"))
+        if (collision.CompareTag("RushItem")) 
         {
             Debug.Log(collision.tag);
-            if (collision.CompareTag("RushItem"))
-            {
-                Destroy(collision.gameObject);
-                StartSuperRushMethod();
-                Invoke("EndSuperRushMethod", invincibleTime = 5);
-            }
+
+            Destroy(collision.gameObject);
+            StartSuperRushMethod();
+            Invoke("EndSuperRushMethod", 5);
         }
 
     }
@@ -215,12 +209,12 @@ public class Player : MonoBehaviour
     private void StartShield()
     {
         animator.SetBool("isShield", true); // 실드가 있는 상태로 튀기 (기본 무적 시간 보유)
-        isInvincible = true;
+        isShielded = true;
     }
     private void EndShield()
     {
         animator.SetBool("isShield", false);
-        isInvincible = false;
+        isShielded = false;
     }
     private void ActiveShield()
     {
@@ -228,8 +222,9 @@ public class Player : MonoBehaviour
     }
     private void InactiveShield()
     {
-        animator.SetBool("isShieldActive", false); // 방어 한번하고 무적 끝기
-        isInvincible = false;
+        animator.SetBool("isShieldActive", false);
+        animator.SetBool("isShield", false);
+        isShielded = false;
     }
 
     private void TakeDamager(int amt)
