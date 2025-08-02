@@ -5,8 +5,8 @@ using UnityEngine;
 
 public enum ItemType
 {
-    //Rush,
-    //Shield,
+    Rush,
+    Shield,
     Magnet,
     Potion,
     Coin
@@ -41,12 +41,12 @@ public class Item : MonoBehaviour
     [SerializeField] private float magnetSpeed = 10f;
     [SerializeField] private float magnetRadius = 5f;   // 자석 범위
 
-    //private bool isShieldActive = false;
-    //private float shieldTimer = 0f;
-    //private float invincibleTimer = 0f;
+    private bool isShieldActive = false;
+    private float shieldTimer = 0f;
+    private float invincibleTimer = 0f;
 
-    //[SerializeField] private float shieldDuration = 30f;            // 실드 지속시간
-    //[SerializeField] private float shieldInvincibleDuration = 1f;   // 실드 파괴후 무적시간
+    [SerializeField] private float shieldDuration = 30f;            // 실드 지속시간
+    [SerializeField] private float shieldInvincibleDuration = 1f;   // 실드 파괴후 무적시간
 
     private void Update()
     {
@@ -72,22 +72,22 @@ public class Item : MonoBehaviour
 
         }
 
-        //if (!isShieldActive) return;
+        if (!isShieldActive) return;
         
-        //shieldTimer -= Time.deltaTime;      // 실드 타이머
-        //if (shieldTimer <= 0f)
-        //{
-        //    isShieldActive = false;
-        //}
+        shieldTimer -= Time.deltaTime;      // 실드 타이머
+        if (shieldTimer <= 0f)
+        {
+            isShieldActive = false;
+        }
 
-        //if (invincibleTimer > 0f)
-        //{
-        //    invincibleTimer -= Time.deltaTime;
-        //    if (invincibleTimer <= 0f && player != null)
-        //    {
-        //        player.isInvincible = false;
-        //    }
-        //}
+        if (invincibleTimer > 0f)
+        {
+            invincibleTimer -= Time.deltaTime;
+            if (invincibleTimer <= 0f && player != null)
+            {
+                player.isInvincible = false;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
