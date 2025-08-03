@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
@@ -65,8 +66,6 @@ public class HealthSystem : MonoBehaviour
         isDead = true;
         Debug.Log("Game Over!");
 
-        if (animator != null)
-            animator.SetTrigger("Die");
 
         //  점수 표시
         if (finalScoreText != null)
@@ -81,21 +80,61 @@ public class HealthSystem : MonoBehaviour
 
         Time.timeScale = 0f;
     }
-}
-
-public class obstacle : MonoBehaviour
-{
-    public float damageAmount = 20f;
-
-    private void OnTriggerEnter2D(Collider2D other)
+    public void RestartGame()
     {
-        if (other.CompareTag("Player"))
-        {
-            HealthSystem health = other.GetComponent<HealthSystem>(); //장애물 데미지
-            if (health != null)
-            {
-                health.TakeDamage(damageAmount);
-            }
-        }
+        Time.timeScale = 1f; // 게임 정지 해제 (필수)
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 현재 씬 다시 로드
     }
+
+    public class ScoreManager : MonoBehaviour
+    {
+        public static ScoreManager Instance;
+        private int currentScore = 0;
+
+        void Awake()
+        {
+            if (Instance == null) Instance = this;
+            else Destroy(gameObject);
+        }
+
+        public void AddScore(int amount)
+        {
+            currentScore += amount;
+        }
+
+        public int GetScore()
+        {
+            return currentScore;
+        }
+
+        public void ResetScore()
+        {
+            currentScore = 0;
+        }
+
+        //public void RestartGame()
+        //{
+        //    Time.timeScale = 1f; // 게임 정지 해제 (필수)
+        //    SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 현재 씬 다시 로드
+        //}
+    }
+
 }
+
+//public class obstacle : MonoBehaviour
+//{
+//    public float damageAmount = 20f;
+
+//    private void OnTriggerEnter2D(Collider2D other)
+//    {
+//        if (other.CompareTag("Player"))
+//        {
+//            HealthSystem health = other.GetComponent<HealthSystem>(); //장애물 데미지
+//            if (health != null)
+//            {
+//                health.TakeDamage(damageAmount);
+//            }
+//        }
+//    }
+//}
+

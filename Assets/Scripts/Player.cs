@@ -197,6 +197,7 @@ public class Player : MonoBehaviour
         if (HP <= 0)
         {
             animator.SetTrigger("isDeath");
+
             controlsEnabled = true;
         }
     }
