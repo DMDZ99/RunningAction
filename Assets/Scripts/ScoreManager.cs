@@ -39,6 +39,11 @@ public class ScoreManager : MonoBehaviour
     {
         throw new NotImplementedException();
     }
+
+    internal int GetScore()
+    {
+        throw new NotImplementedException();
+    }
 }
 
 

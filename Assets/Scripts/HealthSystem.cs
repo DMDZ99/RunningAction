@@ -12,6 +12,10 @@ public class HealthSystem : MonoBehaviour
 
     private bool isDead = false;
 
+    public Animator animator;
+    public GameObject gameOverUI;
+    public Text finalScoreText;  // 최종 점수 표시용 텍스트 UI
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -60,7 +64,22 @@ public class HealthSystem : MonoBehaviour
     {
         isDead = true;
         Debug.Log("Game Over!");
-        // 게임 오버 처리 여기서 추가 (씬 전환 등)
+
+        if (animator != null)
+            animator.SetTrigger("Die");
+
+        //  점수 표시
+        if (finalScoreText != null)
+        {
+            int finalScore = ScoreManager.Instance.GetScore();
+            finalScoreText.text = "Final Score: " + finalScore.ToString();
+        }
+
+        // 게임 오버 UI 활성화
+        if (gameOverUI != null)
+            gameOverUI.SetActive(true);
+
+        Time.timeScale = 0f;
     }
 }
 
