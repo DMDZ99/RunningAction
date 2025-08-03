@@ -85,7 +85,6 @@ public class Player : MonoBehaviour
 
     private void RunnerJumpMethod()
     {
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isGrounded)
@@ -98,6 +97,15 @@ public class Player : MonoBehaviour
                 animator.SetBool("isJump", true);
                 rigidbody2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
                 isJumping = true;
+            }
+        }
+
+        if (isJumping == true)
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                AddGravity();
+                Invoke("SubtractGravity", 0.5f);
             }
         }
     }
@@ -225,6 +233,15 @@ public class Player : MonoBehaviour
         animator.SetBool("isShieldActive", false);
         animator.SetBool("isShield", false);
         isShielded = false;
+    }
+
+    private void AddGravity()
+    {
+        rigidbody2D.gravityScale = 20;
+    }
+    private void SubtractGravity()
+    {
+        rigidbody2D.gravityScale = 4;
     }
 
     private void TakeDamager(int amt)
