@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float forwardSpeed;
     [SerializeField] private float JumpForce;
-    [SerializeField] private float invincibleTime; // 무적 시간
+    //[SerializeField] private float invincibleTime; // 무적 시간
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] private Animator animator;
     [SerializeField] private new Rigidbody2D rigidbody2D;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     private int jumpCount = 0;
     private float extraSpeed; // 추가 스피드
 
+    private bool isShielded; // 실드가 작동하고 있는지 확인하는 변수
     private bool isInvincible; // 무적을 판단하는 변수
     private bool isGrounded; // 땅에 닿았는지 확인하는 변수
     private bool isJumping; // 점프를 하고 있는지 확인하는 변수
@@ -83,7 +85,6 @@ public class Player : MonoBehaviour
 
     private void RunnerJumpMethod()
     {
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isGrounded)
@@ -96,6 +97,15 @@ public class Player : MonoBehaviour
                 animator.SetBool("isJump", true);
                 rigidbody2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
                 isJumping = true;
+            }
+        }
+
+        if (isJumping == true)
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                AddGravity();
+                Invoke("SubtractGravity", 0.5f);
             }
         }
     }
@@ -126,36 +136,48 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("Obstacle"))
         {
-            Debug.Log(collision.tag);
-            if (collision.CompareTag("Obstacle"))
+            if (isShielded)
             {
-                // HP 깎이는 메소드 추가해야 함
-                TakeDamager(10);
-
-                SpriteDamageMethod();
-                Invoke("SpriteResetMethod", invincibleTime);
+                ActiveShield();
+                Invoke("InactiveShield", 0.5f);
+                //InactiveShield();
+                CancelInvoke("EndShield");
+                return;
             }
+            
+            // HP 깎이는 메소드 추가해야 함
+            TakeDamager(10);
+
+            SpriteDamageMethod();
+            Invoke("SpriteResetMethod", 2);
+        }
+
+        // Shield 로직:
+        // 1. 아이템을 먹으면 활성하고 기본 무적 시간이 있다 무적 시간이 끝나면 정상으로 돌아온다.
+        // 2. 활성 도중 장애물과 충돌하면 바로 무적 타임이 끝난다. (별도에 애니메이션이 필요하다)
+        if (collision.CompareTag("ShieldItem"))
+        {
+            Debug.Log(collision.tag);
+            Destroy(collision.gameObject);
+            StartShield();
+            Invoke("EndShield", 5);            
         }
 
         if (collision.CompareTag("Coin"))
         {
             Debug.Log(collision.tag);
-            if (collision.CompareTag("Coin"))
-            {
-                Destroy(collision.gameObject);
-                // 점수가 늘어나는 메소드 추가해야함
-            }
+
+            Destroy(collision.gameObject);
+            // 점수가 늘어나는 메소드 추가해야함
         }
 
-        if (collision.CompareTag("RushItem"))
+        if (collision.CompareTag("RushItem")) 
         {
             Debug.Log(collision.tag);
-            if (collision.CompareTag("RushItem"))
-            {
-                Destroy(collision.gameObject);
-                StartSuperRushMethod();
-                Invoke("EndSuperRushMethod", invincibleTime = 5);
-            }
+
+            Destroy(collision.gameObject);
+            StartSuperRushMethod();
+            Invoke("EndSuperRushMethod", 5);
         }
 
     }
@@ -191,6 +213,37 @@ public class Player : MonoBehaviour
         isInvincible = false;
         extraSpeed = 0;
     }
+
+    private void StartShield()
+    {
+        animator.SetBool("isShield", true); // 실드가 있는 상태로 튀기 (기본 무적 시간 보유)
+        isShielded = true;
+    }
+    private void EndShield()
+    {
+        animator.SetBool("isShield", false);
+        isShielded = false;
+    }
+    private void ActiveShield()
+    {
+        animator.SetBool("isShieldActive", true);
+    }
+    private void InactiveShield()
+    {
+        animator.SetBool("isShieldActive", false);
+        animator.SetBool("isShield", false);
+        isShielded = false;
+    }
+
+    private void AddGravity()
+    {
+        rigidbody2D.gravityScale = 20;
+    }
+    private void SubtractGravity()
+    {
+        rigidbody2D.gravityScale = 4;
+    }
+
     private void TakeDamager(int amt)
     {
         HP -= amt;
