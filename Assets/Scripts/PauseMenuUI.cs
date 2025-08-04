@@ -11,10 +11,11 @@ public class PauseMenuU : MonoBehaviour
 
     void Update()
     {
-        // ESC 키로 일시정지
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
+                ResumeGame();
+            else
                 PauseGame();
         }
     }

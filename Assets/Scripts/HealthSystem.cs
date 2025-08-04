@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
@@ -12,6 +13,10 @@ public class HealthSystem : MonoBehaviour
 
     private bool isDead = false;
 
+    public Animator animator;
+    public GameObject gameOverUI;
+    public Text finalScoreText;  // 최종 점수 표시용 텍스트 UI
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -20,18 +25,7 @@ public class HealthSystem : MonoBehaviour
 
     void Update()
     {
-        if (isDead) return;
-
-        // 체력 자연 감소
-        currentHealth -= decreaseRate * Time.deltaTime;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-
-        UpdateHealthUI();
-
-        if (currentHealth <= 0 && !isDead)
-        {
-            Die();
-        }
+        TakeDamage(decreaseRate * Time.deltaTime);
     }
 
     public void TakeDamage(float amount)
@@ -47,12 +41,13 @@ public class HealthSystem : MonoBehaviour
             Die();
         }
     }
-
-    void UpdateHealthUI()
+    
+    void UpdateHealthUI() // 헬스바
     {
         if (healthSlider != null)
         {
-            healthSlider.value = currentHealth / maxHealth;
+            Debug.Log(currentHealth);
+            healthSlider.value = currentHealth;
         }
     }
 
@@ -60,23 +55,28 @@ public class HealthSystem : MonoBehaviour
     {
         isDead = true;
         Debug.Log("Game Over!");
-        // 게임 오버 처리 여기서 추가 (씬 전환 등)
-    }
-}
 
-public class obstacle : MonoBehaviour
-{
-    public float damageAmount = 20f;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        //  점수 표시
+        if (finalScoreText != null)
         {
-            HealthSystem health = other.GetComponent<HealthSystem>(); //장애물 데미지
-            if (health != null)
-            {
-                health.TakeDamage(damageAmount);
-            }
+            int finalScore = ScoreManager.Instance.GetScore();
+            finalScoreText.text = "Final Score: " + finalScore.ToString();
         }
+
+        // 게임 오버 UI 활성화
+        if (gameOverUI != null)
+            gameOverUI.SetActive(true);
+
+        Time.timeScale = 0f;
     }
+    public void RestartGame()
+    {
+        Time.timeScale = 1f; // 게임 정지 해제 (필수)
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 현재 씬 다시 로드
+    }
+
+
 }
+
+
