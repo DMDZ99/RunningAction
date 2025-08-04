@@ -27,3 +27,8 @@ C#, .Net 8.0
 
 ## 개발 일지
 ### 소요 기간 : 7일
+
+# 사용한 무료 에셋
+https://ansimuz.itch.io/warped-city
+https://textcraft.net/?utm_source=chatgpt.com
+
