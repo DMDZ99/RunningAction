@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Collider2D runnerCollider;
     [SerializeField] private SpriteRenderer playerOriginSprite;
 
+    [SerializeField] private Collider2D itemTriggerCollider;    // 아이템 감지용 트리거콜라이더
+
     [SerializeField] private int HP = 100; //나중에 삭제해야 한다
 
     private int jumpCount = 0;
@@ -34,6 +36,8 @@ public class Player : MonoBehaviour
         animator.SetBool("isSlide", false);
         slideCollider.enabled = false;
         runnerCollider.enabled = true;
+
+        itemTriggerCollider.enabled = true; // 아이템 트리거 콜라이더 항상 활성화
     }
 
     // Update is called once per frame
@@ -107,6 +111,8 @@ public class Player : MonoBehaviour
             animator.SetBool("isSlide", true);
             slideCollider.enabled = true; // component를 끄고 키고하는 코드.
             runnerCollider.enabled = false;
+
+            itemTriggerCollider.enabled = true; // 슬라이드때도 아이템트리거활성화
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
@@ -114,6 +120,8 @@ public class Player : MonoBehaviour
             animator.SetBool("isSlide", false);
             slideCollider.enabled = false;
             runnerCollider.enabled = true;
+
+            itemTriggerCollider.enabled = true;
         }
     }
 
