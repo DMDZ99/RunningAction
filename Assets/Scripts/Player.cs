@@ -131,12 +131,12 @@ public class Player : MonoBehaviour
     // 장애물 충돌 시 구현된는 애니메이션
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // damage 시작점 무적 판단 (무적 시 리턴)
-        if (isInvincible == true)
-            return;
-
         if (collision.CompareTag("Obstacle"))
         {
+            // damage 시작점 무적 판단 (무적 시 리턴) 해당 예외 처리는 장애물에만 필요하다.
+            if (isInvincible == true)
+                return;
+
             if (isShielded)
             {
                 ActiveShield();
