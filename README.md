@@ -1,4 +1,5 @@
 # 스파르타 내일배움캠프 유니티 11기 4주차 Metaverse
+![QQ202584-20429](https://github.com/user-attachments/assets/7fbcf484-46f3-4861-90bf-86b30bf1b0e2)
 
 ## 프로젝트 소개
 쿠키런을 레퍼런스 삼아서 우리만의 게임 제작하기!
