@@ -126,13 +126,13 @@ C#, .Net 8.0
    <details>
    <summary>배운 점: </summary>
     
-   - 123
+   - RaycastHit2D 와 Invoke 그리고 로직을 작성 할 때 문서로 작성을 하면 보다 빠르고 편하게 로직을 작성할수 있다는 걸 배웠습니다.
     
    </details>
    <details>
    <summary>아쉬운 점: </summary>
     
-   - 123 
+   - GameManager 같은 구조체를 사용하지 못하고 너무 일차원 적으로 스크립트를 작성해서 아쉬웠고 coroutine이라는 Invoke보다 더 좋은 키워드를 사용하지 못해서 아쉬었습니다.
     
    </details>
     
