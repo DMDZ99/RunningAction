@@ -10,6 +10,7 @@ TagManager:
   - Coin
   - BackGround
   - coin
+  - ShieldItem
   layers:
   - Default
   - TransparentFX
