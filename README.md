@@ -60,18 +60,23 @@ C#, .Net 8.0
 ### 소요 기간 : 7일
 
 # 사용한 무료 에셋
-- 사이버 펑크 배경 및 스프라이트 에셋 https://ansimuz.itch.io/warped-city
-- 타이틀 및 텍스트 무료 제작 사이트 https://textcraft.net/?utm_source=chatgpt.com
-- 플레이어 스프라이트, 애니메이션 에셋  https://assetstore.unity.com/packages/2d/characters/hero-knight-pixel-art-165188
-- 장애물 스프라이트 에셋
+- 사이버 펑크 배경 및 스프라이트 에셋: https://ansimuz.itch.io/warped-city
+- 타이틀 및 텍스트 무료 제작 사이트: https://textcraft.net/?utm_source=chatgpt.com
+- 플레이어 스프라이트, 애니메이션 에셋: https://assetstore.unity.com/packages/2d/characters/hero-knight-pixel-art-165188
+- 장애물 스프라이트 에셋:
   - https://craftpix.net/freebies/free-industrial-zone-tileset-pixel-art/?num=4&count=186&sq=cyberpunk&pos=5
   - https://craftpix.net/freebies/free-pixel-enemies-character-pack-for-seaport-location/?num=9&count=186&sq=cyberpunk&pos=3
   - https://craftpix.net/freebies/free-seaport-tileset-32x32-pixel-art-for-platformer/?num=10&count=216&sq=seaport&pos=9
   - https://craftpix.net/freebies/free-truck-constructor-pixel-art/?num=1&count=4&sq=truck&pos=0
-- 아이템 스프라이트 에셋
+- 아이템 스프라이트 에셋:
   - https://craftpix.net/freebies/free-paint-pixel-art-icon-pack/?num=1&count=86&sq=potion&pos=11
   - https://gabriel-ceppas.itch.io/coin
-- ChatGPT
+  - https://craftpix.net/freebies/free-undead-loot-pixel-art-icons/?num=3&count=86&sq=potion&pos=7
+  - https://craftpix.net/freebies/free-40-loot-icons-pixel-art/
+- 이펙트:
+  - https://codemanu.itch.io/vfx-free-pack
+  - https://bdragon1727.itch.io/1050-rpg-effects-64x64
+- UI관련 에셋: https://leo-red.itch.io/lucid-icon-pack
+- ChatGPT:
   - https://chatgpt.com/s/m_68906fa020bc8191830dfeffbf7b99f0
   - https://chatgpt.com/s/m_68906fc4cb6c81918431bf9ba0fa0c64
-- UI관련 에셋 https://leo-red.itch.io/lucid-icon-pack
