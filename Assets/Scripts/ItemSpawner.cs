@@ -23,10 +23,19 @@ public class ItemSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (player == null || itemPrefabs.Count == 0)
+        if (player == null || !player)
+        {
+            GameObject found = GameObject.FindGameObjectWithTag("Player");  // 플레이어를 무조건 찾게하기
+            if (found != null)
+                player = found.transform;
+            else
+                return;
+        }
+
+        if (itemPrefabs.Count == 0)
             return;
 
-        timer += Time.deltaTime;
+            timer += Time.deltaTime;
 
         if (timer >= itemSpawnTime)
         {
@@ -66,6 +75,8 @@ public class ItemSpawner : MonoBehaviour
         bool isTooClose = false;
         foreach (Transform obstacle in obstacleList)
         {
+            if (obstacle == null) continue;
+
             if (Vector3.Distance(spawnPosition, obstacle.position) < 3f)
             {
                 isTooClose = true;
@@ -78,6 +89,8 @@ public class ItemSpawner : MonoBehaviour
         {
             foreach (Transform coin in coinList)
             {
+                if (coin == null) continue;
+
                 bool coinGap = true;    // 코인과 장애물 간격 여부
                 foreach (Transform obstacle in obstacleList)
                 {
@@ -106,10 +119,14 @@ public class ItemSpawner : MonoBehaviour
 
     private bool CanSpawnItem()     // 스폰 가능 여부
     {
+        if (player == null) return false;   // 안전검사
+
         Vector3 spawnPosition = player.position + new Vector3(itemDistance, 0f, 0f);
 
         foreach (Transform obstacle in obstacleList)
         {
+            if (obstacle == null) continue;
+
             if (Vector3.Distance(spawnPosition, obstacle.position) < 3f)
                 return false;  // 너무 가까우면 생성 불가
         }

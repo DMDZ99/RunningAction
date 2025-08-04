@@ -97,7 +97,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 925210182, guid: 32a84b862caf4fc4eaa588f342a9e223, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -122,11 +122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  rushEffectPrefab: {fileID: 0}
-  shieldEffectPrefab: {fileID: 0}
-  magnetEffectPrefab: {fileID: 0}
-  potionEffectPrefab: {fileID: 0}
   coinType: 2
+  magnetDuration: 5
+  magnetSpeed: 10
+  magnetRadius: 5
 --- !u!61 &1356832588759470856
 BoxCollider2D:
   m_ObjectHideFlags: 0
