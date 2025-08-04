@@ -68,15 +68,16 @@ https://craftpix.net/freebies/free-industrial-zone-tileset-pixel-art/?num=4&coun
 
 https://craftpix.net/freebies/free-pixel-enemies-character-pack-for-seaport-location/?num=9&count=186&sq=cyberpunk&pos=3
 
-https://gabriel-ceppas.itch.io/coin
-
 https://craftpix.net/freebies/free-seaport-tileset-32x32-pixel-art-for-platformer/?num=10&count=216&sq=seaport&pos=9
 
 https://craftpix.net/freebies/free-truck-constructor-pixel-art/?num=1&count=4&sq=truck&pos=0
 
+아이템 스프라이트 에셋
+https://craftpix.net/freebies/free-paint-pixel-art-icon-pack/?num=1&count=86&sq=potion&pos=11
+https://gabriel-ceppas.itch.io/coin
 ChatGPT
 https://chatgpt.com/s/m_68906fa020bc8191830dfeffbf7b99f0
 
 https://chatgpt.com/s/m_68906fc4cb6c81918431bf9ba0fa0c64
-아이템 스프라이트 에셋
+
 UI관련 에셋 https://leo-red.itch.io/lucid-icon-pack
