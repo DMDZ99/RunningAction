@@ -155,6 +155,14 @@ public class Player : MonoBehaviour
             SpriteDamageMethod();
             Invoke("SpriteResetMethod", 2);
         }
+        if (collision.CompareTag("RushItem")) 
+        {
+            Debug.Log(collision.tag);
+
+            Destroy(collision.gameObject);
+            StartSuperRushMethod();
+            Invoke("EndSuperRushMethod", 5);
+        }
 
         // Shield 로직:
         // 1. 아이템을 먹으면 활성하고 기본 무적 시간이 있다 무적 시간이 끝나면 정상으로 돌아온다.
@@ -167,22 +175,7 @@ public class Player : MonoBehaviour
             Invoke("EndShield", 5);            
         }
 
-        //if (collision.CompareTag("Coin"))
-        //{
-        //    Debug.Log(collision.tag);
 
-        //    Destroy(collision.gameObject);
-        //    // 점수가 늘어나는 메소드 추가해야함
-        //}
-
-        if (collision.CompareTag("RushItem")) 
-        {
-            Debug.Log(collision.tag);
-
-            Destroy(collision.gameObject);
-            StartSuperRushMethod();
-            Invoke("EndSuperRushMethod", 5);
-        }
 
     }
 
@@ -207,6 +200,7 @@ public class Player : MonoBehaviour
     }
     private void StartSuperRushMethod() // rush가 시작되는 메소드
     {
+        CancelInvoke("SpriteResetMethod");
         animator.SetBool("isRush", true);
         isInvincible = true;
         extraSpeed = 6;
