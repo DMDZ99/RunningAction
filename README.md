@@ -64,5 +64,19 @@ C#, .Net 8.0
 타이틀 및 텍스트 무료 제작 사이트 https://textcraft.net/?utm_source=chatgpt.com
 플레이어 스프라이트, 애니메이션 에셋  https://assetstore.unity.com/packages/2d/characters/hero-knight-pixel-art-165188
 장애물 스프라이트 에셋
+https://craftpix.net/freebies/free-industrial-zone-tileset-pixel-art/?num=4&count=186&sq=cyberpunk&pos=5
+
+https://craftpix.net/freebies/free-pixel-enemies-character-pack-for-seaport-location/?num=9&count=186&sq=cyberpunk&pos=3
+
+https://gabriel-ceppas.itch.io/coin
+
+https://craftpix.net/freebies/free-seaport-tileset-32x32-pixel-art-for-platformer/?num=10&count=216&sq=seaport&pos=9
+
+https://craftpix.net/freebies/free-truck-constructor-pixel-art/?num=1&count=4&sq=truck&pos=0
+
+ChatGPT
+https://chatgpt.com/s/m_68906fa020bc8191830dfeffbf7b99f0
+
+https://chatgpt.com/s/m_68906fc4cb6c81918431bf9ba0fa0c64
 아이템 스프라이트 에셋
 UI관련 에셋 https://leo-red.itch.io/lucid-icon-pack
