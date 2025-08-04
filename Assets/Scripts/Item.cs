@@ -154,6 +154,8 @@ public class Item : MonoBehaviour
         }
 
         Debug.Log($"코인 : {coinType} + {score}");
+
+        ScoreManager.Instance.AddScore(score);   // 점수
     }
 
     //private void RushPlayer(GameObject player)

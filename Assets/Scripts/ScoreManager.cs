@@ -35,26 +35,20 @@ public class ScoreManager : MonoBehaviour
             scoreText.text = score.ToString("D3");
     }
 
-    internal void AddCoin(int v)
+    public int GetScore()
     {
-        throw new NotImplementedException();
-    }
-
-    internal int GetScore()
-    {
-        throw new NotImplementedException();
+        return score;
     }
 }
 
 
-public class PlayerController : MonoBehaviour
-{
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("coin"))
-        {
-            ScoreManager.Instance.AddCoin(1);
-            Destroy(other.gameObject);
-        }
-    }
-}
+//public class PlayerController : MonoBehaviour
+//{
+//    void OnTriggerEnter2D(Collider2D other)
+//    {
+//        if (other.CompareTag("coin"))
+//        {
+//            Destroy(other.gameObject);
+//        }
+//    }
+//}
