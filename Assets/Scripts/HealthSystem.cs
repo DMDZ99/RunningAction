@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class HealthSystem : MonoBehaviour
 
     public Animator animator;
     public GameObject gameOverUI;
-    public Text finalScoreText;  // 최종 점수 표시용 텍스트 UI
+    public TextMeshProUGUI finalScoreText;  // 최종 점수 표시용 텍스트 UI 텍스트유징메시프로
 
     void Start()
     {
@@ -61,7 +62,7 @@ public class HealthSystem : MonoBehaviour
         if (finalScoreText != null)
         {
             int finalScore = ScoreManager.Instance.GetScore();
-            finalScoreText.text = "Final Score: " + finalScore.ToString();
+            finalScoreText.text = finalScore.ToString();
         }
 
         // 게임 오버 UI 활성화
