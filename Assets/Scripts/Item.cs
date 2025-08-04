@@ -171,11 +171,11 @@ public class Item : MonoBehaviour
         {
             float healAmount = healthSystem.maxHealth * 0.3f;
             healthSystem.currentHealth += healAmount;
-        }
 
-        // Do not exceed max HP 
-        if (healthSystem.currentHealth >= healthSystem.maxHealth)
-            healthSystem.currentHealth = healthSystem.maxHealth;
+            // Do not exceed max HP 
+            if (healthSystem.currentHealth >= healthSystem.maxHealth)
+                healthSystem.currentHealth = healthSystem.maxHealth;
+        }
     }
 
     private void MagnetPlayer(GameObject player)

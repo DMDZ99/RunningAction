@@ -122,11 +122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  rushEffectPrefab: {fileID: 0}
-  shieldEffectPrefab: {fileID: 0}
-  magnetEffectPrefab: {fileID: 0}
-  potionEffectPrefab: {fileID: 0}
-  coinType: 0
+  coinType: 1
+  magnetDuration: 5
+  magnetSpeed: 10
+  magnetRadius: 5
 --- !u!61 &4413858015199144620
 BoxCollider2D:
   m_ObjectHideFlags: 0
