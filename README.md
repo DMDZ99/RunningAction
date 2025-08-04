@@ -86,6 +86,92 @@ C#, .Net 8.0
 
 ## 배운 점 & 아쉬운 점
 
+<details>
+<summary>강인구 [팀장] </summary>
+    
+   <details>
+   <summary>배운 점: </summary>
+    
+   - 123
+    
+   </details>
+   <details>
+   <summary>아쉬운 점: </summary>
+    
+   - 123 
+    
+   </details>
+    
+</details>
+<details>
+<summary>이도현 [팀원] </summary>
+    
+   <details>
+   <summary>배운 점: </summary>
+    
+   - 123
+    
+   </details>
+   <details>
+   <summary>아쉬운 점: </summary>
+    
+   - 123 
+    
+   </details>
+    
+</details>
+<details>
+<summary>이승율 [팀원] </summary>
+    
+   <details>
+   <summary>배운 점: </summary>
+    
+   - 123
+    
+   </details>
+   <details>
+   <summary>아쉬운 점: </summary>
+    
+   - 123 
+    
+   </details>
+    
+</details>
+<details>
+<summary>이현수 [팀원] </summary>
+    
+   <details>
+   <summary>배운 점: </summary>
+    
+   - 123
+    
+   </details>
+   <details>
+   <summary>아쉬운 점: </summary>
+    
+   - 123 
+    
+   </details>
+    
+</details>
+<details>
+<summary>정권우 [팀원] </summary>
+    
+   <details>
+   <summary>배운 점: </summary>
+    
+   - 123
+    
+   </details>
+   <details>
+   <summary>아쉬운 점: </summary>
+    
+   - 123 
+    
+   </details>
+    
+</details>
+
 <br>
 
 ## 제작 팀원과 맡은 역할
