@@ -25,18 +25,7 @@ public class HealthSystem : MonoBehaviour
 
     void Update()
     {
-        if (isDead) return;
-
-        // 체력 자연 감소
-        currentHealth -= decreaseRate * Time.deltaTime;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-
-        UpdateHealthUI();
-
-        if (currentHealth <= 0 && !isDead)
-        {
-            Die();
-        }
+        TakeDamage(decreaseRate * Time.deltaTime);
     }
 
     public void TakeDamage(float amount)
@@ -52,12 +41,13 @@ public class HealthSystem : MonoBehaviour
             Die();
         }
     }
-
-    void UpdateHealthUI()
+    
+    void UpdateHealthUI() // 헬스바
     {
         if (healthSlider != null)
         {
-            healthSlider.value = currentHealth / maxHealth;
+            Debug.Log(currentHealth);
+            healthSlider.value = currentHealth;
         }
     }
 
@@ -88,53 +78,5 @@ public class HealthSystem : MonoBehaviour
 
 
 }
-//public class ScoreManager : MonoBehaviour
-//    {
-//        public static ScoreManager Instance;
-//        private int currentScore = 0;
 
-//        void Awake()
-//        {
-//            if (Instance == null) Instance = this;
-//            else Destroy(gameObject);
-//        }
-
-//        public void AddScore(int amount)
-//        {
-//            currentScore += amount;
-//        }
-
-//        public int GetScore()
-//        {
-//            return currentScore;
-//        }
-
-//        public void ResetScore()
-//        {
-//            currentScore = 0;
-//        }
-
-        //public void RestartGame()
-        //{
-        //    Time.timeScale = 1f; // 게임 정지 해제 (필수)
-        //    SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 현재 씬 다시 로드
-        //}
-    //}
-
-//public class obstacle : MonoBehaviour
-//{
-//    public float damageAmount = 20f;
-
-//    private void OnTriggerEnter2D(Collider2D other)
-//    {
-//        if (other.CompareTag("Player"))
-//        {
-//            HealthSystem health = other.GetComponent<HealthSystem>(); //장애물 데미지
-//            if (health != null)
-//            {
-//                health.TakeDamage(damageAmount);
-//            }
-//        }
-//    }
-//}
 

@@ -12,8 +12,9 @@ public class Player : MonoBehaviour
     [SerializeField] private Collider2D slideCollider;
     [SerializeField] private Collider2D runnerCollider;
     [SerializeField] private SpriteRenderer playerOriginSprite;
+    [SerializeField] private HealthSystem healthSystem;
 
-    [SerializeField] private int HP = 100; //나중에 삭제해야 한다
+    //[SerializeField] private int HP = 100; //나중에 삭제해야 한다
 
     private int jumpCount = 0;
     private float extraSpeed; // 추가 스피드
@@ -144,9 +145,12 @@ public class Player : MonoBehaviour
                 CancelInvoke("EndShield");
                 return;
             }
-            
-            // HP 깎이는 메소드 추가해야 함
-            TakeDamager(10);
+
+            // HP 깎이는 메소드 추가해야 함 (HP == Time)
+            // 죽었을 때 게임 종료 및 다시시작 페널이 뜸
+            // 게임 종료 로직: 1. 타임 아웃; 2. 데미지를 받아서 시간 전부 소진
+            // TakeDamager(100); (Player 스크립트에 있는 메서드)
+            healthSystem.TakeDamage(100);
 
             SpriteDamageMethod();
             Invoke("SpriteResetMethod", 2);
@@ -163,13 +167,13 @@ public class Player : MonoBehaviour
             Invoke("EndShield", 5);            
         }
 
-        if (collision.CompareTag("Coin"))
-        {
-            Debug.Log(collision.tag);
+        //if (collision.CompareTag("Coin"))
+        //{
+        //    Debug.Log(collision.tag);
 
-            Destroy(collision.gameObject);
-            // 점수가 늘어나는 메소드 추가해야함
-        }
+        //    Destroy(collision.gameObject);
+        //    // 점수가 늘어나는 메소드 추가해야함
+        //}
 
         if (collision.CompareTag("RushItem")) 
         {
@@ -244,14 +248,14 @@ public class Player : MonoBehaviour
         rigidbody2D.gravityScale = 4;
     }
 
-    private void TakeDamager(int amt)
-    {
-        HP -= amt;
-        if (HP <= 0)
-        {
-            animator.SetTrigger("isDeath");
+    //private void TakeDamager(int amt)
+    //{
+    //    HP -= amt;
+    //    if (HP <= 0)
+    //    {
+    //        animator.SetTrigger("isDeath");
 
-            controlsEnabled = true;
-        }
-    }
+    //        controlsEnabled = true;
+    //    }
+    //}
 }
