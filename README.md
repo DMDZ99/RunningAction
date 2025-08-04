@@ -73,10 +73,11 @@ C#, .Net 8.0
   - https://gabriel-ceppas.itch.io/coin
   - https://craftpix.net/freebies/free-undead-loot-pixel-art-icons/?num=3&count=86&sq=potion&pos=7
   - https://craftpix.net/freebies/free-40-loot-icons-pixel-art/
+  - ChatGPT:
+  - https://chatgpt.com/s/m_68906fa020bc8191830dfeffbf7b99f0
+  - https://chatgpt.com/s/m_68906fc4cb6c81918431bf9ba0fa0c64
 - 이펙트:
   - https://codemanu.itch.io/vfx-free-pack
   - https://bdragon1727.itch.io/1050-rpg-effects-64x64
 - UI관련 에셋: https://leo-red.itch.io/lucid-icon-pack
-- ChatGPT:
-  - https://chatgpt.com/s/m_68906fa020bc8191830dfeffbf7b99f0
-  - https://chatgpt.com/s/m_68906fc4cb6c81918431bf9ba0fa0c64
+
