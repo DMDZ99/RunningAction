@@ -86,40 +86,40 @@ public class HealthSystem : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 현재 씬 다시 로드
     }
 
-    public class ScoreManager : MonoBehaviour
-    {
-        public static ScoreManager Instance;
-        private int currentScore = 0;
 
-        void Awake()
-        {
-            if (Instance == null) Instance = this;
-            else Destroy(gameObject);
-        }
+}
+//public class ScoreManager : MonoBehaviour
+//    {
+//        public static ScoreManager Instance;
+//        private int currentScore = 0;
 
-        public void AddScore(int amount)
-        {
-            currentScore += amount;
-        }
+//        void Awake()
+//        {
+//            if (Instance == null) Instance = this;
+//            else Destroy(gameObject);
+//        }
 
-        public int GetScore()
-        {
-            return currentScore;
-        }
+//        public void AddScore(int amount)
+//        {
+//            currentScore += amount;
+//        }
 
-        public void ResetScore()
-        {
-            currentScore = 0;
-        }
+//        public int GetScore()
+//        {
+//            return currentScore;
+//        }
+
+//        public void ResetScore()
+//        {
+//            currentScore = 0;
+//        }
 
         //public void RestartGame()
         //{
         //    Time.timeScale = 1f; // 게임 정지 해제 (필수)
         //    SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 현재 씬 다시 로드
         //}
-    }
-
-}
+    //}
 
 //public class obstacle : MonoBehaviour
 //{
